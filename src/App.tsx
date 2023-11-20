@@ -1,35 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Link, Outlet, RootRoute, Router } from '@tanstack/react-router'
+import OverViewRoute from './pages/Overview/Overview'
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
+export const rootRoute = new RootRoute({
+  component: () => (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="p-2 flex gap-2">
+        <Link to="/" className="[&.active]:font-bold">
+          Home
+        </Link>{' '}
+        <Link to="/overview" className="[&.active]:font-bold">
+          Overview
+        </Link>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <hr />
+      <Outlet />
     </>
-  )
-}
+  ),
+})
 
-export default App
+
+const routeTree = rootRoute.addChildren([OverViewRoute])
+export const router = new Router({ routeTree })
