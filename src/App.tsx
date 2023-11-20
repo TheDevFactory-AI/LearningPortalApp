@@ -20,7 +20,6 @@ export const rootRoute = new RootRoute({
                 Overview
               </Link>
             </div>
-            
           </div>
           <div className="basis-1/6">
             <div className="pb-8">
@@ -32,11 +31,9 @@ export const rootRoute = new RootRoute({
           </div>
         </div>
       </aside>
-
       <div className="p-8 sm:ml-64">
         <Outlet />
       </div>
-      
     </>
   ),
 })
