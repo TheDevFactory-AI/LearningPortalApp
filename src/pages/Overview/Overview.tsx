@@ -12,4 +12,4 @@ const OverViewRoute = new Route({
     path: "/overview",
     component: Overview,
     })
-export default OverViewRoute
+export default OverViewRoute;
