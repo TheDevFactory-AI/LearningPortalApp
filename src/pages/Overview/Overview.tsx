@@ -1,14 +1,13 @@
 import { Route } from "@tanstack/react-router"
 import { rootRoute } from "../../App"
 
-import { Button } from "@/components/ui/button"
-
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import PressableButton from "@/components/ui/pressableButton"
 
 function AccordionDemo() {
   return (
@@ -16,11 +15,11 @@ function AccordionDemo() {
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
-            <Button asChild>
-            <button onClick={()=>{console.log('pressed')}}>
-              Hover me!
-            </button> 
-            </Button>
+            <PressableButton
+            props={{variant:"ghost"}}
+            onPress={()=>console.log('pressed')}>
+              Hover me !
+            </PressableButton>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
