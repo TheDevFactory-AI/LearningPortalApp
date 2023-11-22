@@ -3,7 +3,7 @@ import { rootRoute } from "../../App"
 
 const Home=()=>{
   return (
-    <div>Welcome!</div>
+    <div>Welcome home!</div>
   )
 }
 

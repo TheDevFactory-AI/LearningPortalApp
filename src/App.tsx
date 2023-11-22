@@ -1,4 +1,4 @@
-import { Outlet, RootRoute, Router, } from '@tanstack/react-router'
+import { Link, Outlet, Router, rootRouteWithContext } from '@tanstack/react-router'
 import OverViewRoute from './pages/Overview/Overview'
 import HomeRoute from './pages/Home/Home'
 import AboutRoute from './pages/About/About'
@@ -8,10 +8,14 @@ import LinksContainer from './components/Navigation/LinkContainer'
 import './index.css'
 import '../app/globals.css'
 import  ComboboxDemo  from './components/Navigation/ProjectSelect'
+import { QueryClient } from '@tanstack/react-query';
+import CourseDetailsRoute from './pages/CourseDetails'
 
+export const queryClient=new QueryClient()
 
-
-export const rootRoute = new RootRoute({
+export const rootRoute = rootRouteWithContext<{
+  queryClient: QueryClient
+}>()({
   component: () => (
     <>
     <SideBar>
@@ -19,9 +23,17 @@ export const rootRoute = new RootRoute({
         <LinksContainer 
         links={[
           {to:"/overview",title:"Overview"},
-          {to:"/home",title:"Home"},
+          {to:"/",title:"Home"},
         ]}/>
         <ComboboxDemo/>
+        <div className="pb-4">
+        <Link 
+          to={'course/$courseId'}
+          params={{courseId:1}}
+          className="[&.active]:font-bold text-white">
+          {'going to course details'}
+        </Link>
+        </div>
       </div>
       <div className="basis-1/6">
         <LinksContainer
@@ -37,8 +49,11 @@ export const rootRoute = new RootRoute({
 })
 
 
-const routeTree = rootRoute.addChildren([OverViewRoute, HomeRoute, AboutRoute])
+const routeTree = rootRoute.addChildren([OverViewRoute, HomeRoute, AboutRoute, CourseDetailsRoute])
 export const router = new Router({ 
-  routeTree
+  routeTree,
+  context: {
+    queryClient: queryClient
+  }
 
 })
