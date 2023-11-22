@@ -9,7 +9,7 @@ const LinksContainer = ({links}:{links:LinkProps[]}) => {
     links.map((link)=>{
         return(
         <div className="pb-4">
-        <Link to={link.to} className="[&.active]:font-bold">
+        <Link to={link.to} className="[&.active]:font-bold text-white">
           {link.title}
         </Link>
         </div>

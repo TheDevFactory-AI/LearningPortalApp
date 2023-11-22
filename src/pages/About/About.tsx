@@ -1,4 +1,4 @@
-import { Route } from "@tanstack/react-router"
+import { Route } from '@tanstack/react-router';
 import { rootRoute } from "../../App"
 
 const About=()=>{
