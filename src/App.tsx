@@ -28,7 +28,7 @@ export const rootRoute = rootRouteWithContext<{
         <ComboboxDemo/>
         <div className="pb-4">
         <Link 
-          to={'course/$courseId'}
+          to={'course/$courseId'} //create index route for course
           params={{courseId:1}}
           className="[&.active]:font-bold text-white">
           {'going to course details'}

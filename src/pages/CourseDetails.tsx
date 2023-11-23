@@ -34,11 +34,13 @@ const CourseDetailsRoute = new Route({
     }),
     stringifyParams: ({ courseId }) => ({ courseId: `${courseId}` }),
     /* this ensure that data is loaded before loading the component-needs a real API call
-    - also validate that context.queryClient is working correctly
+    - also validate in the future that context.queryClient is working correctly
     load: ({params,context}) =>
     //queryClient is expected to be passed in the context from parent route
     context.queryClient.ensureQueryData(
       courseQueryOptions({courseId:params.courseId}),
+      //this last line ensures that the data is loaded before the component is rendered
+      //by checking if the data is already in the cache
     ),
     */
 
