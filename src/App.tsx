@@ -10,6 +10,7 @@ import '../app/globals.css'
 import  ComboboxDemo  from './components/Navigation/ProjectSelect'
 import { QueryClient } from '@tanstack/react-query';
 import CourseDetailsRoute from './pages/CourseDetails'
+import SignupRoute from './pages/Authentication/SignUp'
 
 export const queryClient=new QueryClient()
 
@@ -25,13 +26,23 @@ export const rootRoute = rootRouteWithContext<{
           {to:"/overview",title:"Overview"},
           {to:"/",title:"Home"},
         ]}/>
-        <ComboboxDemo/>
+        <div className="pb-4">
+          <ComboboxDemo/>
+        </div>
         <div className="pb-4">
         <Link 
           to={'course/$courseId'} //create index route for course
           params={{courseId:1}}
           className="[&.active]:font-bold text-white">
-          {'going to course details'}
+          {'Course Details'}
+        </Link>
+        </div>
+        <div className="pb-4">
+        <Link 
+          to={'/signup'} //create index route for course
+          params={{courseId:1}}
+          className="[&.active]:font-bold text-white">
+          {'SignUp'}
         </Link>
         </div>
       </div>
@@ -49,7 +60,7 @@ export const rootRoute = rootRouteWithContext<{
 })
 
 
-const routeTree = rootRoute.addChildren([OverViewRoute, HomeRoute, AboutRoute, CourseDetailsRoute])
+const routeTree = rootRoute.addChildren([OverViewRoute, HomeRoute, AboutRoute, CourseDetailsRoute,SignupRoute])
 export const router = new Router({ 
   routeTree,
   context: {
