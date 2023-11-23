@@ -9,7 +9,7 @@ import './index.css'
 import '../app/globals.css'
 import  ComboboxDemo  from './components/Navigation/ProjectSelect'
 import { QueryClient } from '@tanstack/react-query';
-import CourseDetailsRoute from './pages/CourseDetails'
+import CourseDetailsRoute from './pages/CourseDetails/CourseDetails'
 import SignupRoute from './pages/Authentication/SignUp'
 
 export const queryClient=new QueryClient()
