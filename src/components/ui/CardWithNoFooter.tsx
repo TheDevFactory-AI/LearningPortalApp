@@ -1,26 +1,21 @@
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import PressableButton from "../ui/pressableButton"
 
 
-export type AuthCardProps = {
+export type CardWithNoFooterProps = {
   children: React.ReactNode,
-  onSubmit: () => void,
   cardTitle: string,
   cardDescription: string
 }
-export function AuthCard({
+export function CardWithNoFooter({
   children,
-  onSubmit,
   cardTitle,
-  cardDescription}:AuthCardProps) {
+  cardDescription}:CardWithNoFooterProps) {
 
 
   return (
@@ -32,10 +27,6 @@ export function AuthCard({
       <CardContent>
         {children}
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <PressableButton onPress={onSubmit}>Submit</PressableButton>
-      </CardFooter>
     </Card>
   )
 }

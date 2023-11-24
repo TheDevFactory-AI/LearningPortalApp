@@ -1,25 +1,21 @@
 import { rootRoute } from "@/App"
-import { AuthCard } from "@/components/Auth/AuthCard"
-import FormElements from "@/components/ui/FormElements";
 import { Route } from "@tanstack/react-router"
 import { useForm } from 'react-hook-form';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import * as z from 'zod';
 import { SignupSchema } from "@/utils/FormUtils/FormSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signUp, confirmSignUp } from '../../utils/AuthUtils/Signup';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { CardWithNoFooter } from "@/components/ui/CardWithNoFooter";
+import { AuthCard } from '@/components/Auth/AuthCard';
+import FormElements from "@/components/ui/FormElements";
+
+
 
 const SignUp = () => {
-  /**
-    // 1. Define your form.
-  const form = useForm<z.infer<typeof SignupSchema>>({
-    resolver: zodResolver(SignupSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
-  })
-   */
+  const [succsessfulSignup, setSuccsessfulSignup] = useState<string | null>(null);
   const { register, handleSubmit, formState: {errors} } = useForm<z.infer<typeof SignupSchema>>({
     resolver: zodResolver(SignupSchema),
     defaultValues: {
@@ -31,12 +27,48 @@ const SignUp = () => {
   const _triggerSubmit = () => {
     submitRef?.current?.click(); // Programmatically click the hidden submit button
   };
+  const { register:confirmationCodeRegister, handleSubmit:confirmSubmit,  } = useForm()
 
-  const onSubmit = (data:any) => {
-    console.log(data);
-
+  const onSubmit = async (data:any) => {
+   try{
+    const {message,status} =await signUp({
+      name:data.userName,
+      email:data.email,
+      password:data.password,
+      phone_number:'+254712345678',
+     })
+     if (status === 'success'){
+       setSuccsessfulSignup(data.email);
+       console.log(message);
+     }
+     
+   }catch(e){
+      console.log(e);
+      return
+   }
   };
-  
+
+  const confirmEmail = async (data:any) => {
+    await confirmSignUp({
+      code:data.confirmationCode,
+      email:succsessfulSignup as string
+    })
+
+  }
+
+  if(succsessfulSignup){
+    return (
+      <CardWithNoFooter 
+      cardTitle="Confirm e-mail"
+      cardDescription="Enter the confirmation code sent to your email">
+        <form onSubmit={confirmSubmit(confirmEmail)} className="flex flex-col space-y-1.5">
+          <Input  id={'confirmEmail'} type={'text'} {...confirmationCodeRegister('confirmationCode')} name={'confirmationCode'}/>
+          <Button type='submit' >Confirm</Button>
+        </form>
+      </CardWithNoFooter> 
+    )
+  }
+
 
   return (
     <AuthCard 
@@ -47,6 +79,7 @@ const SignUp = () => {
         <FormElements
         errors={errors}
         formMembers={[
+          {id:"userName",label:"Username",type:"text",register,name:"userName"},
           {id:"email",label:"Email",type:"email",register,name:"email"},
           {id:"password",label:"Password",type:"password",register,name:"password"},
           {id:"confirmPassword",label:"Confirm Password",type:"password",register, name:"confirmPassword"}
@@ -55,6 +88,8 @@ const SignUp = () => {
       </form>
     </AuthCard>
   )
+
+
 }
 
 const SignupRoute = new Route({

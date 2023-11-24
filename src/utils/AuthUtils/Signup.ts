@@ -3,16 +3,25 @@ import UserPool from './UserPool';
 import {
     CognitoUserAttribute,
     ClientMetadata,
+    ISignUpResult,
+    CognitoUser,
   } from 'amazon-cognito-identity-js';
 // This is the same user pool we created in the above step
 
 export type SignUpProps={
   name: string,
   email: string,
-  password: string,
-  phone_number: string,
+  password?: string,
+  phone_number?: string,
   metaData?: ClientMetadata,
 }
+
+export type SignUpResponse={
+  status: 'success'|'error',
+  message: Error | ISignUpResult
+
+}
+
 
 export const signUp=async ({
   name,
@@ -20,27 +29,27 @@ export const signUp=async ({
   password,
   phone_number,
   metaData
-}:SignUpProps)=>{
+}:SignUpProps):Promise<SignUpResponse>=>{
   const attributeList = [
-    new CognitoUserAttribute({
-      Name: 'name',
-      Value: name,
-    }),
     new CognitoUserAttribute({
       Name: 'email',
       Value: email,
     }),
     new CognitoUserAttribute({
-        Name: 'phone_number',
-        Value: phone_number,
-        }),
+      Name: 'phone_number',
+      Value: phone_number??'',
+    }),
+    new CognitoUserAttribute({
+      Name: 'name',
+      Value: name??'',
+    }),
     // add other needed attributes here
   ];
 
-  await new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
     UserPool.signUp(
-      email,
-      password,
+      name,
+      password??'',
       attributeList,
       [],
       (error, result) => {
@@ -50,7 +59,7 @@ export const signUp=async ({
 
         if (result) {
           console.log('userName is'+result.user.getUsername());
-          resolve({status:'success',message:result.user});
+          resolve({status:'success',message:result});
         }
       },
       { ...metaData },
@@ -61,10 +70,10 @@ export const signUp=async ({
 //idea: switch UI to become form to enter verification code
 
 
-export async function confirmSignUp({code,email}:{code: string, email: string}) {
+export async function confirmSignUp({code,email}:{code: string, email: string}):Promise<CognitoUser | Error> {
   const cognitoUser = getUser({email});
-  await new Promise((resolve, reject) => {
-    cognitoUser.confirmRegistration(code, true, (err: Error, result) => {
+  return await new Promise((resolve, reject) => {
+    cognitoUser.confirmRegistration(code, false, (err: Error, result) => {
       if (err) {
        reject(err);
       }

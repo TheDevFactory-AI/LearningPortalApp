@@ -28,8 +28,7 @@ const FormElements = ({formMembers,errors}:FormProps) => {
                         {errors[name] && errors[name].message && <p className="text-red-500 text-sm">{errors[name].message}</p>}
                     </div>
                     </>
-                    
-                    )})}
+        )})}
         </div>)
     }                         
     /*

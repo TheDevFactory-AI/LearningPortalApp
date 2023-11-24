@@ -1,15 +1,17 @@
 import { rootRoute } from "@/App"
 import { Route } from '@tanstack/react-router';
 import { z } from 'zod';
-import {queryOptions} from '@tanstack/react-query'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+/*
 const courseQueryOptions = ({courseId}:{courseId:number}) =>queryOptions({
   //bind page to 
   queryKey: ['course',courseId],
   queryFn: () =>  fetch(`/api/courses/${courseId}`).then((res) =>
   res.json()),
 })
+*/
+
 
 
 //desperate attempt to get useParams to work
