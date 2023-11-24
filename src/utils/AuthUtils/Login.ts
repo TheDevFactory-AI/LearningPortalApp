@@ -24,9 +24,8 @@ import { getUser } from './GetUser';
   }
   
   
-  export async function Login(
-    userName: string,
-    password: string,
+  export async function SignIn(
+    {userName,password}:{userName: string,password: string}
   ): Promise<AuthenticateUserResp> {
     return new Promise((resolve, reject) => {
       const cognitoUser = getUser({userName});

@@ -11,13 +11,14 @@ import { Button } from "@/components/ui/button";
 import { CardWithNoFooter } from "@/components/ui/CardWithNoFooter";
 import { AuthCard } from '@/components/Auth/AuthCard';
 import FormElements from "@/components/ui/FormElements";
+import { SignIn } from "@/utils/AuthUtils/Login";
 //import { CognitoUser } from 'amazon-cognito-identity-js';
 
 
 
 const SignUp = () => {
-  const [succsessfulSignup, setSuccsessfulSignup] = useState<string | null>(null);
-  const { register, handleSubmit, formState: {errors} } = useForm<z.infer<typeof SignupSchema>>({
+  const [successfulSignup, setSucsessfulSignup] = useState(false);
+  const { register, handleSubmit, formState: {errors}, getValues } = useForm<z.infer<typeof SignupSchema>>({
     resolver: zodResolver(SignupSchema),
     defaultValues: {
       email: "",
@@ -39,7 +40,7 @@ const SignUp = () => {
       phone_number:'+254712345678',
      })
      if (status === 'success'){
-       setSuccsessfulSignup(data.userName);
+       setSucsessfulSignup(true);
        console.log(message);
      }
      
@@ -49,13 +50,21 @@ const SignUp = () => {
    }
   };
 
+
   const confirmEmail = async (data:any) => {
+    const userName=getValues('userName');
+    const password=getValues('password');
+    console.log(userName + " " + password);
     try{
       const signUpConfirmation=await confirmSignUp({
           code:data.confirmationCode,
-          userName:succsessfulSignup as string
+          userName
         })
       console.log(signUpConfirmation);
+      const AuthUserResp= await SignIn({
+        userName,
+        password})
+      console.log(JSON.stringify({...AuthUserResp}));
     }catch(e){
       console.log(e);
       return
@@ -64,14 +73,14 @@ const SignUp = () => {
 
   }
 
-  if(succsessfulSignup){
+  if(successfulSignup){
     return (
       <CardWithNoFooter 
       cardTitle="Confirm e-mail"
       cardDescription="Enter the confirmation code sent to your email">
         <form onSubmit={confirmSubmit(confirmEmail)} className="flex flex-col space-y-1.5">
           <Input  id={'confirmEmail'} type={'text'} {...confirmationCodeRegister('confirmationCode')} name={'confirmationCode'}/>
-          <Button type='submit' >Confirm</Button>
+          <Button type='submit'>Confirm</Button>
         </form>
       </CardWithNoFooter> 
     )

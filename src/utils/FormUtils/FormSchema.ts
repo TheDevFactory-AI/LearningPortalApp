@@ -24,8 +24,7 @@ export const SignupSchema = z.object({
 });
 
 export const LoginSchema = z.object({
-  email: z.string()
-  .email('Invalid email address'), // Validates the email
+  userName: z.string().min(3, 'Username must be at least 3 characters long'),
   password: z.string()
   .min(8, 'Password must be at least 8 characters long')
   .regex(passwordRegex.number, 'Password must contain at least 1 number')
