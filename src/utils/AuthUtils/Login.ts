@@ -25,14 +25,14 @@ import { getUser } from './GetUser';
   
   
   export async function Login(
-    email: string,
+    userName: string,
     password: string,
   ): Promise<AuthenticateUserResp> {
     return new Promise((resolve, reject) => {
-      const cognitoUser = getUser({email});
+      const cognitoUser = getUser({userName});
   
       const authenticationData = {
-        Username: email,
+        Username: userName,
         Password: password,
       };
       const authenticationDetails = new AuthenticationDetails(authenticationData);

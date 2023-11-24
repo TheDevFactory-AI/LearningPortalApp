@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { CardWithNoFooter } from "@/components/ui/CardWithNoFooter";
 import { AuthCard } from '@/components/Auth/AuthCard';
 import FormElements from "@/components/ui/FormElements";
+//import { CognitoUser } from 'amazon-cognito-identity-js';
 
 
 
@@ -27,7 +28,7 @@ const SignUp = () => {
   const _triggerSubmit = () => {
     submitRef?.current?.click(); // Programmatically click the hidden submit button
   };
-  const { register:confirmationCodeRegister, handleSubmit:confirmSubmit,  } = useForm()
+  const { register:confirmationCodeRegister, handleSubmit:confirmSubmit  } = useForm()
 
   const onSubmit = async (data:any) => {
    try{
@@ -38,7 +39,7 @@ const SignUp = () => {
       phone_number:'+254712345678',
      })
      if (status === 'success'){
-       setSuccsessfulSignup(data.email);
+       setSuccsessfulSignup(data.userName);
        console.log(message);
      }
      
@@ -49,10 +50,17 @@ const SignUp = () => {
   };
 
   const confirmEmail = async (data:any) => {
-    await confirmSignUp({
-      code:data.confirmationCode,
-      email:succsessfulSignup as string
-    })
+    try{
+      const signUpConfirmation=await confirmSignUp({
+          code:data.confirmationCode,
+          userName:succsessfulSignup as string
+        })
+      console.log(signUpConfirmation);
+    }catch(e){
+      console.log(e);
+      return
+    }
+    
 
   }
 

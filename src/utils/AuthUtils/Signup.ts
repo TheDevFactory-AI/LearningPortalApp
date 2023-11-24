@@ -70,8 +70,8 @@ export const signUp=async ({
 //idea: switch UI to become form to enter verification code
 
 
-export async function confirmSignUp({code,email}:{code: string, email: string}):Promise<CognitoUser | Error> {
-  const cognitoUser = getUser({email});
+export async function confirmSignUp({code,userName}:{code: string, userName: string}):Promise<CognitoUser | Error> {
+  const cognitoUser = getUser({userName});
   return await new Promise((resolve, reject) => {
     cognitoUser.confirmRegistration(code, false, (err: Error, result) => {
       if (err) {
@@ -84,8 +84,8 @@ export async function confirmSignUp({code,email}:{code: string, email: string}):
   });
 }
 
-export function resendCode({email}:{email: string}) {
-  const cognitoUser = getUser({email});
+export function resendCode({userName}:{userName: string}) {
+  const cognitoUser = getUser({userName});
   cognitoUser.resendConfirmationCode((err, result) => {
     if (err) {
       // Some error message on screen or a toast

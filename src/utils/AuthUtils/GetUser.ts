@@ -1,9 +1,10 @@
 import { CognitoUser, ICognitoUserData } from "amazon-cognito-identity-js";
+import UserPool from './UserPool';
 
-export function getUser({email}:{email: string}) {
+export function getUser({userName}:{userName: string}) {
     const userData: ICognitoUserData = {
-      Username: email,
-      Pool: import.meta.env.VITE_COGNITO_USER_POOL_ID,
+      Username: userName,
+      Pool: UserPool,
     };
   
     return new CognitoUser(userData);
