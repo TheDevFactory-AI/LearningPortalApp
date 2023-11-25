@@ -3,13 +3,13 @@ import { useRef, useState } from 'react';
 import * as z from 'zod';
 import { SignupSchema } from "@/utils/FormUtils/FormSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signUp, confirmSignUp } from '../../utils/AuthUtils/Signup';
+import { signUp, confirmSignUp } from '../AuthUtils/Signup';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CardWithNoFooter } from "@/components/ui/CardWithNoFooter";
 import { AuthCard } from '@/components/Auth/AuthCard';
 import FormElements from "@/components/ui/FormElements";
-import { SignIn } from "@/utils/AuthUtils/Login";
+import { SignIn } from "@/pages/Authentication/AuthUtils/Login";
 //import { CognitoUser } from 'amazon-cognito-identity-js';
 
 

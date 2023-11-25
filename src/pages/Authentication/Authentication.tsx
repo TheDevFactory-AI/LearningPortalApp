@@ -1,8 +1,8 @@
 import { rootRoute } from "@/App"
 import TabsWrapper from "@/components/ui/TabsWrapper"
 import { Route } from "@tanstack/react-router"
-import {SignUp} from "./SignUp"
-import { Login } from "./Login"
+import {SignUp} from "./AuthComponents/SignUp"
+import { Login } from "./AuthComponents/Login"
 import { useState } from "react"
 
 const Authentication = () => {

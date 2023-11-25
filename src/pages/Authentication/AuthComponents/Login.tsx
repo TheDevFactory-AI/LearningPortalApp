@@ -1,6 +1,6 @@
 import { AuthCard } from "@/components/Auth/AuthCard"
 import FormElements from "@/components/ui/FormElements"
-import { SignIn } from "@/utils/AuthUtils/Login";
+import { SignIn } from "@/pages/Authentication/AuthUtils/Login";
 import { LoginSchema } from "@/utils/FormUtils/FormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef } from "react";
@@ -20,11 +20,12 @@ export const Login = () => {
   const submitRef = useRef(null) as any
   const onSubmit = async (data:any) => {
     try{
-      const {accessToken}=await SignIn({
+      const resp=await SignIn({
         userName:data.userName,
         password:data.password
       })
-      console.log(accessToken);
+    console.log({...resp.session}, 'validity: ', resp.session?.isValid());
+
     }catch(e){
       console.log(e);
       return
