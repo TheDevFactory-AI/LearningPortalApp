@@ -1,5 +1,3 @@
-import { rootRoute } from "@/App"
-import { Route } from "@tanstack/react-router"
 import { useForm } from 'react-hook-form';
 import { useRef, useState } from 'react';
 import * as z from 'zod';
@@ -16,7 +14,7 @@ import { SignIn } from "@/utils/AuthUtils/Login";
 
 
 
-const SignUp = () => {
+export const SignUp = ({setConfirmationStage}:{setConfirmationStage:()=>void}) => {
   const [successfulSignup, setSucsessfulSignup] = useState(false);
   const { register, handleSubmit, formState: {errors}, getValues } = useForm<z.infer<typeof SignupSchema>>({
     resolver: zodResolver(SignupSchema),
@@ -40,8 +38,9 @@ const SignUp = () => {
       phone_number:'+254712345678',
      })
      if (status === 'success'){
-       setSucsessfulSignup(true);
-       console.log(message);
+        setSucsessfulSignup(true);
+        setConfirmationStage();
+        console.log(message);
      }
      
    }catch(e){
@@ -109,10 +108,3 @@ const SignUp = () => {
 
 }
 
-const SignupRoute = new Route({
-    getParentRoute: () => rootRoute,
-    path: "/signup",
-    component: SignUp,
-})
-
-export default SignupRoute;

@@ -10,8 +10,7 @@ import '../app/globals.css'
 import  ComboboxDemo  from './components/Navigation/ProjectSelect'
 import { QueryClient } from '@tanstack/react-query';
 import CourseDetailsRoute from './pages/CourseDetails/CourseDetails'
-import SignupRoute from './pages/Authentication/SignUp'
-import LogInRoute from './pages/Authentication/Login'
+import AuthRoute from './pages/Authentication/Authentication'
 
 export const queryClient=new QueryClient()
 
@@ -32,25 +31,11 @@ export const rootRoute = rootRouteWithContext<{
         </div>
         <div className="pb-4">
         <Link 
-          to={'course/$courseId'} //create index route for course
+          to={'course/$courseId'}
           params={{courseId:1}}
           className="[&.active]:font-bold text-white">
           {'Course Details'}
         </Link>
-        </div>
-        <div className="pb-4">
-          <Link 
-            to={'/signup'} //create index route for course
-            className="[&.active]:font-bold text-white">
-            {'SignUp'}
-          </Link>
-        </div>
-        <div className="pb-4">
-          <Link 
-            to={'/login'} //create index route for course
-            className="[&.active]:font-bold text-white">
-            {'Login'}
-          </Link>
         </div>
       </div>
       <div className="basis-1/6">
@@ -67,7 +52,7 @@ export const rootRoute = rootRouteWithContext<{
 })
 
 
-const routeTree = rootRoute.addChildren([OverViewRoute, HomeRoute, AboutRoute, CourseDetailsRoute,SignupRoute,LogInRoute])
+const routeTree = rootRoute.addChildren([OverViewRoute, HomeRoute, AboutRoute, CourseDetailsRoute, AuthRoute])
 export const router = new Router({ 
   routeTree,
   context: {

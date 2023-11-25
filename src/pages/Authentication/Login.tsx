@@ -1,15 +1,13 @@
-import { rootRoute } from "@/App";
 import { AuthCard } from "@/components/Auth/AuthCard"
 import FormElements from "@/components/ui/FormElements"
 import { SignIn } from "@/utils/AuthUtils/Login";
 import { LoginSchema } from "@/utils/FormUtils/FormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Route } from "@tanstack/react-router";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const Login = () => {
+export const Login = () => {
   const { register, handleSubmit, formState: {errors} } = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -50,12 +48,3 @@ const Login = () => {
     </AuthCard>
   )
 }
-
-const LogInRoute = new Route({
-  getParentRoute: () => rootRoute,
-  path: "/login",
-  component: Login,
-})
-
-
-export default LogInRoute

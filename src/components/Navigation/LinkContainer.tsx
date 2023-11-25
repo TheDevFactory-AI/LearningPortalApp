@@ -6,9 +6,9 @@ type LinkProps={
 }
 const LinksContainer = ({links}:{links:LinkProps[]}) => {
   return (
-    links.map((link)=>{
+    links.map((link, index)=>{
         return(
-        <div className="pb-4">
+        <div className="pb-4" key={index}>
         <Link to={link.to} className="[&.active]:font-bold text-white">
           {link.title}
         </Link>
