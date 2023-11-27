@@ -1,9 +1,14 @@
 import { Route } from '@tanstack/react-router';
 import { rootRoute } from "../../App"
+import Chat from "../Chat/Chat"
 
 const About=()=>{
   return (
-    <div>About</div>
+    <>
+      <div>About</div>
+      <Chat/>
+    </>
+    
   )
 }
 
