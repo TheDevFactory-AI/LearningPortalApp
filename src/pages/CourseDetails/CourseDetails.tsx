@@ -1,4 +1,4 @@
-import { rootRoute } from "@/App"
+import { MainAppRoute } from "@/rootRoutes/MainApp";
 import { Route } from '@tanstack/react-router';
 import { z } from 'zod';
 
@@ -27,7 +27,7 @@ const CourseDetails = ({useParams}:{useParams:any}) => {
 
 
 const CourseDetailsRoute = new Route({
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => MainAppRoute,
     path: "course/$courseId",
     component: CourseDetails,//this is how the component is rendered based on the path
     //this is why the suspense is working

@@ -35,41 +35,42 @@ export const useSignIn=({queryClient}:{queryClient:QueryClient})=>{
 }
 
 const renewToken=({cognitoUser,refreshToken}:{cognitoUser:CognitoUser,refreshToken:CognitoRefreshToken})=>{
-    let resp:{
-        status: 'error' | 'success',
-        payload: any
-    }={status:'error', payload:null}
-
-    cognitoUser.refreshSession(refreshToken,(err,session:CognitoUserSession)=>{
-            if(err){
-                throw Error('failed to refresh session')
-            }
-            return resp={
-                status:'success',
-                payload:{session}
-            }
-
-    })
-    return resp
+    return new Promise((resolve, reject) => {
+        cognitoUser.refreshSession(refreshToken, (err, session:CognitoUserSession) => {
+          if (err) {
+            reject(new Error('failed to refresh session'));
+          } else {
+            resolve(session);
+          }
+        });
+      });
 }
 
 /**
- * Checks and refreshes token if needed to maintain session data
- * TO_DO: Refresh token will eventually expire; if it does, sign the user out
+ * Checks and refreshes token if needed to maintain session data based on signIn response
+ * payload
+ * @param AuthPayload signIn response payload
+ * @todo Refresh token will eventually expire; if it does, sign the user out
  */
-export const manageSession=({AuthPayload}:{AuthPayload:AuthenticateUserResp})=>{
+export const manageAccessToken=({AuthPayload}:{AuthPayload:AuthenticateUserResp})=>{
     const {session}=AuthPayload
     if (!session){
         throw Error('session data is missing')
     }
     const expirationTime=session.getAccessToken().getExpiration()
     const refreshToken=session.getRefreshToken()
-    const newSessionData=executeWithin10Minutes({
-        callBack:()=>renewToken({
-            cognitoUser:AuthPayload.cognitoUser,
-            refreshToken:refreshToken
-        }),
-        deadLine:expirationTime
-    })
-    return newSessionData
+    try{
+        const newSessionData=executeWithin10Minutes({
+            callBack:()=>renewToken({
+                cognitoUser:AuthPayload.cognitoUser,
+                refreshToken:refreshToken
+            }),
+            deadLine:expirationTime
+        }) as CognitoUserSession
+        return newSessionData
+    }catch(e){
+        return e
+    }
 }
+
+export const manageRefreshToken=()=>{}

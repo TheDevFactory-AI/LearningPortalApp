@@ -1,5 +1,5 @@
 import { Route } from "@tanstack/react-router"
-import { rootRoute } from "../../App"
+import { MainAppRoute } from "@/rootRoutes/MainApp"
 
 const Home=()=>{
   return (
@@ -8,8 +8,8 @@ const Home=()=>{
 }
 
 const HomeRoute = new Route({
-    getParentRoute: () => rootRoute,
-    path: "/",
+    getParentRoute: () => MainAppRoute,
+    path: "/home",
     component: Home,
     })
 export default HomeRoute;

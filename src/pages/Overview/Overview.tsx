@@ -1,6 +1,4 @@
 import { Route } from "@tanstack/react-router"
-import { rootRoute } from "../../App"
-
 import {
   Accordion,
   AccordionContent,
@@ -8,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import PressableButton from "@/components/ui/pressableButton"
+import { MainAppRoute } from "@/rootRoutes/MainApp"
 
 function AccordionDemo() {
   return (
@@ -54,7 +53,7 @@ const Overview=()=>{
 }
 
 const OverViewRoute = new Route({
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => MainAppRoute,
     path: "/overview",
     component: Overview,
     })
