@@ -29,6 +29,7 @@ export const useSignIn=({queryClient}:{queryClient:QueryClient})=>{
     return useMutation({
         mutationFn:SignIn,
         onSuccess:(data)=>{
+            console.log(data)
             queryClient.setQueryData(['Auth'],data)
         },
     })

@@ -3,7 +3,8 @@ import LinksContainer from "@/components/Navigation/LinkContainer"
 import ComboboxDemo from "@/components/Navigation/ProjectSelect"
 import SideBar from "@/components/Navigation/SideBar"
 import PressableButton from "@/components/ui/pressableButton"
-import { Outlet,Link, Route } from "@tanstack/react-router"
+import { AuthenticateUserResp } from "@/pages/Authentication/AuthUtils/Login"
+import { Outlet,Link, Route, redirect } from "@tanstack/react-router"
 
 
 export const MainApp =  () => {
@@ -45,9 +46,22 @@ export const MainApp =  () => {
 export const MainAppRoute=new Route({
     component:MainApp,
     getParentRoute:()=> rootRoute,
-    path:'/'
+    path:'/',
+    beforeLoad:({context:{queryClient}})=>{
+      const resp=queryClient.getQueryData(['Auth']) as {data:AuthenticateUserResp} | undefined
+      if(!resp){
+        throw redirect({
+          to:'/Auth',
+          replace:true
+        })
+      }
+      return {
+        auth:resp.data //making auth payload available accross all child pages
+      }
+    },
+    load:({context:{auth}})=>{
+      //some middleware logic here to 
+    }
 })
 
 
-
-//const MainAppRouteTree=MainAppRoute.addChildren([OverViewRoute, HomeRoute, AboutRoute, CourseDetailsRoute])
