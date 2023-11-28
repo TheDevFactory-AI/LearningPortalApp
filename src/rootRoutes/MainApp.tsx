@@ -48,20 +48,21 @@ export const MainAppRoute=new Route({
     getParentRoute:()=> rootRoute,
     path:'/',
     beforeLoad:({context:{queryClient}})=>{
-      const resp=queryClient.getQueryData(['Auth']) as {data:AuthenticateUserResp} | undefined
+      const resp=queryClient.getQueryData(['Auth']) as AuthenticateUserResp | undefined
       if(!resp){
         throw redirect({
           to:'/Auth',
           replace:true
         })
       }
+      console.log('before loading time !!! @/') 
       return {
-        auth:resp.data //making auth payload available accross all child pages
+        auth:resp //making auth payload available accross all child pages
       }
-    },
-    load:({context:{auth}})=>{
-      //some middleware logic here to 
-    }
+      },
+      load:()=>{
+        console.log('loading time !!! @/') 
+      }
 })
 
 

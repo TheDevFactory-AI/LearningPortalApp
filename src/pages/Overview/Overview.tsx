@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/accordion"
 import PressableButton from "@/components/ui/pressableButton"
 import { MainAppRoute } from "@/rootRoutes/MainApp"
+import { manageAccessToken } from "@/utils/Auth/Session"
+
 
 function AccordionDemo() {
   return (
@@ -56,5 +58,15 @@ const OverViewRoute = new Route({
     getParentRoute: () => MainAppRoute,
     path: "/overview",
     component: Overview,
+    beforeLoad:async ({context})=>{
+      const token=await manageAccessToken({AuthPayload:context.auth})
+      if(!token){//no token means that token is still good
+        console.log('token still good')
+        return
+      }
+      return {
+        auth:token //renew auth token
+      }
+    },
     })
 export default OverViewRoute;

@@ -1,4 +1,5 @@
 import { MainAppRoute } from "@/rootRoutes/MainApp";
+import { manageAccessToken } from "@/utils/Auth/Session";
 import { Route } from '@tanstack/react-router';
 import { z } from 'zod';
 
@@ -45,6 +46,21 @@ const CourseDetailsRoute = new Route({
       //by checking if the data is already in the cache
     ),
     */
+    beforeLoad:async ({params,context:{auth}})=>{
+      console.log(`before loading time !!! @/course/${params.courseId}`) 
+      const token=await manageAccessToken({AuthPayload:auth})
+      if(!token){//no token means that token is still good
+        return
+      }
+      return {
+        auth:token//updating token
+      }
+      
+    },
+    load:({params})=>{
+      console.log(`loading time !!! @/course/${params.courseId}`) 
+      //simply sure that data is loaded properly here
+    }
 
 })
 
