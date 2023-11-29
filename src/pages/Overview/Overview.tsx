@@ -8,6 +8,7 @@ import {
 import PressableButton from "@/components/ui/pressableButton"
 import { MainAppRoute } from "@/rootRoutes/MainApp"
 import { manageAccessToken } from "@/utils/Auth/Session"
+import { AuthenticateUserResp } from "../Authentication/AuthUtils/Login"
 
 
 function AccordionDemo() {
@@ -58,14 +59,18 @@ const OverViewRoute = new Route({
     getParentRoute: () => MainAppRoute,
     path: "/overview",
     component: Overview,
-    beforeLoad:async ({context})=>{
-      const token=await manageAccessToken({AuthPayload:context.auth})
-      if(!token){//no token means that token is still good
-        console.log('token still good')
+    beforeLoad:async ({context:{auth,queryClient}})=>{
+      const session=await manageAccessToken({AuthPayload:auth})
+      if(!session){//no token means that token is still good
         return
       }
+      const newAuthPayload={
+        ...auth,
+          session
+        } as AuthenticateUserResp
+      queryClient.setQueryData(['Auth'],newAuthPayload)
       return {
-        auth:token //renew auth token
+        auth:newAuthPayload
       }
     },
     })

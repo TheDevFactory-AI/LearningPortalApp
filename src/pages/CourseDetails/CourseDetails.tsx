@@ -2,6 +2,7 @@ import { MainAppRoute } from "@/rootRoutes/MainApp";
 import { manageAccessToken } from "@/utils/Auth/Session";
 import { Route } from '@tanstack/react-router';
 import { z } from 'zod';
+import { AuthenticateUserResp } from "../Authentication/AuthUtils/Login";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 /*
@@ -36,26 +37,19 @@ const CourseDetailsRoute = new Route({
       courseId: z.number().int().parse(Number(params.courseId)),
     }),
     stringifyParams: ({ courseId }) => ({ courseId: `${courseId}` }),
-    /* this ensure that data is loaded before loading the component-needs a real API call
-    - also validate in the future that context.queryClient is working correctly
-    load: ({params,context}) =>
-    //queryClient is expected to be passed in the context from parent route
-    context.queryClient.ensureQueryData(
-      courseQueryOptions({courseId:params.courseId}),
-      //this last line ensures that the data is loaded before the component is rendered
-      //by checking if the data is already in the cache
-    ),
-    */
-    beforeLoad:async ({params,context:{auth}})=>{
-      console.log(`before loading time !!! @/course/${params.courseId}`) 
-      const token=await manageAccessToken({AuthPayload:auth})
-      if(!token){//no token means that token is still good
+    beforeLoad:async ({context:{auth,queryClient}})=>{
+      const session=await manageAccessToken({AuthPayload:auth})
+      if(!session){//no token means that token is still good
         return
       }
+      const newAuthPayload={
+        ...auth,
+          session
+        } as AuthenticateUserResp
+      queryClient.setQueryData(['Auth'],newAuthPayload)
       return {
-        auth:token//updating token
+        auth:newAuthPayload
       }
-      
     },
     load:({params})=>{
       console.log(`loading time !!! @/course/${params.courseId}`) 

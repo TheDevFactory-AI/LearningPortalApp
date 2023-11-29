@@ -1,6 +1,5 @@
 import { Outlet, Router, rootRouteWithContext } from '@tanstack/react-router'
 import OverViewRoute from './pages/Overview/Overview'
-import HomeRoute from './pages/Home/Home'
 import AboutRoute from './pages/About/About'
 import './index.css'
 import '../app/globals.css'
@@ -22,7 +21,7 @@ export const rootRoute = rootRouteWithContext<{
 
 const routeTree = rootRoute.addChildren([
   AuthRoute,
-  MainAppRoute.addChildren([OverViewRoute, HomeRoute, AboutRoute, CourseDetailsRoute])
+  MainAppRoute.addChildren([OverViewRoute, AboutRoute, CourseDetailsRoute])
 ])
 export const router = new Router({ 
   routeTree,
