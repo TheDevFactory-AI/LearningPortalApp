@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AuthCard } from "@/components/Auth/AuthCard"
 import FormElements from "@/components/ui/FormElements"
 import { useSignIn } from "@/utils/Auth/Session";
@@ -18,7 +19,7 @@ export const Login = () => {
       userName: "",
       password: "",
     }});
-  const {mutate:SignIn, isError}=useSignIn({queryClient})
+  const {mutate:SignIn}=useSignIn({queryClient})
   const _triggerSubmit = () => {
     submitRef?.current?.click();
   };
