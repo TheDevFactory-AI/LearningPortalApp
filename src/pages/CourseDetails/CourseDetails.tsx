@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MainAppRoute } from "@/rootRoutes/MainApp";
 import { manageAccessToken } from "@/utils/Auth/Session";
 import { Route } from '@tanstack/react-router';
