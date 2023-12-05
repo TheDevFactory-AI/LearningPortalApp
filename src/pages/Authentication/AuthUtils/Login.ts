@@ -7,7 +7,7 @@ import {
   } from 'amazon-cognito-identity-js';
 import { getUser } from './GetUser';
   
-  interface AuthenticateUserResp {
+export interface AuthenticateUserResp {
     type: string;
     cognitoUser: CognitoUser;
   
