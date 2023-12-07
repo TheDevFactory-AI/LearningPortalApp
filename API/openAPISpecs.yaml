@@ -1,0 +1,404 @@
+openapi: 3.0.0
+info:
+  title: Code Evaluation API
+  description: API for managing users, tracks, and projects for a code evaluation platform.
+  version: "1.0.0"
+servers:
+  - url: https://api.example.com/v1 #need to attach 
+    description: Production server
+
+paths:
+  /users:
+    get:
+      summary: Get a list of all users
+      responses:
+        '200':
+          description: A JSON array of user objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '401':
+          description: Unauthorized - Authentication is required and has failed or has not yet been provided.
+        '403':
+          description: Forbidden - The server understood the request but refuses to authorize it.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+        '503':
+          description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '401':
+          description: Unauthorized - Authentication is required and has failed or has not yet been provided.
+        '403':
+          description: Forbidden - The server understood the request but refuses to authorize it.
+        '422':
+          description: Unprocessable Entity - The server understands the content type of the request entity, and the syntax of the request entity is correct, but it was unable to process the contained instructions.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+  /users/{userId}:
+    get:
+      summary: Get a user by ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The user with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+    put:
+      summary: Update a user by ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated successfully.
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The user with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+    delete:
+      summary: Delete a user by ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User deleted successfully.
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The user with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+  /tracks:
+    get:
+      summary: Get a list of all tracks
+      responses:
+        '200':
+          description: A JSON array of track objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Track'
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+    post:
+      summary: Create a new track
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Track'
+      responses:
+        '201':
+          description: Track created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+  /tracks/{trackId}:
+    get:
+      summary: Get a track by ID
+      parameters:
+        - in: path
+          name: trackId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Track retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+        '404':
+          description: Not Found - The track with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+    put:
+      summary: Update a track by ID
+      parameters:
+        - in: path
+          name: trackId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Track'
+      responses:
+        '200':
+          description: Track updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The track with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+    delete:
+      summary: Delete a track by ID
+      parameters:
+        - in: path
+          name: trackId
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Track deleted successfully
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The track with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+  /projects:
+    get:
+      summary: Get a list of all projects
+      responses:
+        '200':
+          description: A JSON array of project objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '401':
+          description: Unauthorized - Authentication is required and has failed or has not yet been provided.
+        '403':
+          description: Forbidden - The server understood the request but refuses to authorize it.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+        '503':
+          description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+    post:
+      summary: Create a new project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '401':
+          description: Unauthorized - Authentication is required and has failed or has not yet been provided.
+        '403':
+          description: Forbidden - The server understood the request but refuses to authorize it.
+        '422':
+          description: Unprocessable Entity - The server understands the content type of the request entity, and the syntax of the request entity is correct, but it was unable to process the contained instructions.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+  /projects/{projectId}:
+    get:
+      summary: Get a project by ID
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The project with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+    put:
+      summary: Update a project by ID
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '200':
+          description: Project updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The project with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+    delete:
+      summary: Delete a project by ID
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Project deleted successfully.
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The project with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+          
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - uid
+        - email
+      properties:
+        uid:
+          type: string
+        github_ID:
+          type: string
+        email:
+          type: string
+        profile:
+          type: object
+          additionalProperties: true
+        evaluationTracks:
+          type: array
+          items:
+            type: string
+
+    Track:
+      type: object
+      required:
+        - trackId
+        - trackName
+      properties:
+        trackId:
+          type: string
+        trackDescription:
+          type: string
+        trackName:
+          type: string
+        trackProgression:
+          type: object
+          required:
+            - stepName
+            - stepStatus
+          properties:
+            stepName:
+              type: string
+            stepDescription:
+              type: string
+            stepStatus:
+              type: string
+        projects:
+          type: array
+          items:
+            type: string
+
+    Project:
+      type: object
+      required:
+        - projectID
+        - repo_address
+        - projectDescription
+      properties:
+        projectID:
+          type: string
+        repo_address:
+          type: string
+        projectDescription:
+          type: string
+        resultsId:
+          type: array
+          items:
+            type: string

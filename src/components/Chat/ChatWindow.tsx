@@ -12,12 +12,16 @@ const ChatWindow=({conversation}:{conversation:ChatBubbleProp[]})=>{
     return (
         <Card className="h-[350px] w-[800px] bg-black  overflow-auto p-4">
         {showChat && conversation.map(({from,text})=>{
-            return <MessageBubble from={from} text={text}/>
+            return <MessageBubble  from={from} text={text}/>
         }
         )}
         </Card>
     )
 }
+
+ChatWindow({
+    conversation:[]
+})
 
 
 export default ChatWindow;
