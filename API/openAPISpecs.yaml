@@ -1,16 +1,18 @@
 openapi: 3.0.0
 info:
-  title: Code Evaluation API
+  title: BackendEntryPoint
   description: API for managing users, tracks, and projects for a code evaluation platform.
   version: "1.0.0"
 servers:
-  - url: https://api.example.com/v1 #need to attach 
+  - url: https:/api.example.com/v1 #need to attach actual server address
     description: Production server
 
 paths:
   /users:
     get:
       summary: Get a list of all users
+      security:
+        - BearerAuth: []
       responses:
         '200':
           description: A JSON array of user objects
@@ -59,6 +61,8 @@ paths:
   /users/{userId}:
     get:
       summary: Get a user by ID
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: userId
@@ -122,6 +126,8 @@ paths:
   /tracks:
     get:
       summary: Get a list of all tracks
+      security:
+        - BearerAuth: []
       responses:
         '200':
           description: A JSON array of track objects
@@ -156,6 +162,8 @@ paths:
   /tracks/{trackId}:
     get:
       summary: Get a track by ID
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: trackId
@@ -221,6 +229,8 @@ paths:
   /projects:
     get:
       summary: Get a list of all projects
+      security:
+        - BearerAuth: []
       responses:
         '200':
           description: A JSON array of project objects
@@ -269,6 +279,8 @@ paths:
   /projects/{projectId}:
     get:
       summary: Get a project by ID
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: projectId
@@ -402,3 +414,14 @@ components:
           type: array
           items:
             type: string
+
+  securitySchemes:
+    BearerAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools
+      x-amazon-apigateway-authorizer:
+        type: cognito_user_pools
+        providerARNs:
+          - "arn:aws:cognito-idp:us-east-1:426691418260:userpool/us-east-1_RO71EiBnE"
