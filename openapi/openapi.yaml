@@ -120,7 +120,6 @@ paths:
             statusCode: "201"
             responseTemplates:
               application/json: |
-                # Mock response for PUT
                 {
                   "message": "User created successfully."
                 }
@@ -207,7 +206,6 @@ paths:
             statusCode: "200"
             responseTemplates:
               application/json: |
-                # Mock response for PUT
                 {
                   "message": "User updated successfully."
                 }
@@ -241,7 +239,6 @@ paths:
             statusCode: "204"
             responseTemplates:
               application/json: |
-                # Mock response for PUT
                 {
                   "message": "User deleted successfully."
                 }
@@ -378,7 +375,6 @@ paths:
             statusCode: "201"
             responseTemplates:
               application/json: |
-                # Mock response for PUT
                 {
                   "message": "Track created successfully."
                 }
@@ -472,7 +468,6 @@ paths:
             statusCode: "200"
             responseTemplates:
               application/json: |
-                # Mock response for PUT
                 {
                   "message": "Track updated successfully."
                 }
@@ -506,7 +501,6 @@ paths:
             statusCode: "204"
             responseTemplates:
               application/json: |
-                # Mock response for PUT
                 {
                   "message": "Tracks deleted successfully."
                 }
@@ -626,7 +620,6 @@ paths:
             statusCode: "201"
             responseTemplates:
               application/json: |
-                # Mock response for PUT
                 {
                   "message": "Project created successfully."
                 }
@@ -715,7 +708,6 @@ paths:
             statusCode: "200"
             responseTemplates:
               application/json: |
-                # Mock response for PUT
                 {
                   "message": "Project updated successfully."
                 }
@@ -749,7 +741,6 @@ paths:
             statusCode: "204"
             responseTemplates:
               application/json: |
-                # Mock response for PUT
                 {
                   "message": "Project deleted successfully."
                 }
