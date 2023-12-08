@@ -108,6 +108,23 @@ paths:
           description: Unprocessable Entity - The server understands the content type of the request entity, and the syntax of the request entity is correct, but it was unable to process the contained instructions.
         '500':
           description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 201
+            }
+        responses:
+          default:
+            statusCode: "201"
+            responseTemplates:
+              application/json: |
+                # Mock response for PUT
+                {
+                  "message": "User created successfully."
+                }
+        passthroughBehavior: "when_no_templates"
 
 
   /users/{userId}:
@@ -178,6 +195,23 @@ paths:
           description: Not Found - The user with the specified ID was not found.
         '500':
           description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: |
+                # Mock response for PUT
+                {
+                  "message": "User updated successfully."
+                }
+        passthroughBehavior: "when_no_templates"
     delete:
       summary: Delete a user by ID
       parameters:
@@ -195,6 +229,23 @@ paths:
           description: Not Found - The user with the specified ID was not found.
         '500':
           description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 204
+            }
+        responses:
+          default:
+            statusCode: "204"
+            responseTemplates:
+              application/json: |
+                # Mock response for PUT
+                {
+                  "message": "User deleted successfully."
+                }
+        passthroughBehavior: "when_no_templates"
 
   /tracks:
     get:
@@ -315,6 +366,23 @@ paths:
           description: Bad Request - The request was invalid or missing parameters.
         '500':
           description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 201
+            }
+        responses:
+          default:
+            statusCode: "201"
+            responseTemplates:
+              application/json: |
+                # Mock response for PUT
+                {
+                  "message": "Track created successfully."
+                }
+        passthroughBehavior: "when_no_templates"
 
   /tracks/{trackId}:
     get:
@@ -392,6 +460,23 @@ paths:
           description: Not Found - The track with the specified ID was not found.
         '500':
           description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: |
+                # Mock response for PUT
+                {
+                  "message": "Track updated successfully."
+                }
+        passthroughBehavior: "when_no_templates"
     delete:
       summary: Delete a track by ID
       parameters:
@@ -409,6 +494,23 @@ paths:
           description: Not Found - The track with the specified ID was not found.
         '500':
           description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 204
+            }
+        responses:
+          default:
+            statusCode: "204"
+            responseTemplates:
+              application/json: |
+                # Mock response for PUT
+                {
+                  "message": "Tracks deleted successfully."
+                }
+        passthroughBehavior: "when_no_templates"
 
   /projects:
     get:
@@ -512,6 +614,23 @@ paths:
           description: Unprocessable Entity - The server understands the content type of the request entity, and the syntax of the request entity is correct, but it was unable to process the contained instructions.
         '500':
           description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 201
+            }
+        responses:
+          default:
+            statusCode: "201"
+            responseTemplates:
+              application/json: |
+                # Mock response for PUT
+                {
+                  "message": "Project created successfully."
+                }
+        passthroughBehavior: "when_no_templates"
 
   /projects/{projectId}:
     get:
@@ -584,6 +703,23 @@ paths:
           description: Not Found - The project with the specified ID was not found.
         '500':
           description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: |
+                # Mock response for PUT
+                {
+                  "message": "Project updated successfully."
+                }
+        passthroughBehavior: "when_no_templates"
     delete:
       summary: Delete a project by ID
       parameters:
@@ -601,6 +737,23 @@ paths:
           description: Not Found - The project with the specified ID was not found.
         '500':
           description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 204
+            }
+        responses:
+          default:
+            statusCode: "204"
+            responseTemplates:
+              application/json: |
+                # Mock response for PUT
+                {
+                  "message": "Project deleted successfully."
+                }
+        passthroughBehavior: "when_no_templates"
 
 components:
   schemas:
