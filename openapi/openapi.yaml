@@ -1,0 +1,683 @@
+openapi: 3.0.3
+info:
+  title: BackendEntryPoint
+  description: API for managing users, tracks, and projects for a code evaluation platform.
+  version: "1.0.0"
+servers:
+  - url: https://api.example.com/v1 #need to attach actual server address
+    description: Production server
+
+paths:
+  /users:
+    get:
+      summary: Get a list of all users
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A JSON array of user objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '401':
+          description: Unauthorized - Authentication is required and has failed or has not yet been provided.
+        '403':
+          description: Forbidden - The server understood the request but refuses to authorize it.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+        '503':
+          description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: |
+                #set($inputRoot = $input.path('$'))
+                [
+                  {
+                    "uid": "user1",
+                    "github_ID": "githubuser1",
+                    "email": "user1@example.com",
+                    "profile": {},
+                    "evaluationTracks": ["track1", "track2"]
+                  },
+                  {
+                    "uid": "user2",
+                    "github_ID": "githubuser2",
+                    "email": "user2@example.com",
+                    "profile": {},
+                    "evaluationTracks": ["track3", "track4"]
+                  },
+                  {
+                    "uid": "user3",
+                    "github_ID": "githubuser3",
+                    "email": "user3@example.com",
+                    "profile": {},
+                    "evaluationTracks": ["track5", "track6"]
+                  },
+                  {
+                    "uid": "user4",
+                    "github_ID": "githubuser4",
+                    "email": "user4@example.com",
+                    "profile": {},
+                    "evaluationTracks": ["track7", "track8"]
+                  },
+                  {
+                    "uid": "user5",
+                    "github_ID": "githubuser5",
+                    "email": "user5@example.com",
+                    "profile": {},
+                    "evaluationTracks": ["track9", "track10"]
+                  },
+                ]
+        passthroughBehavior: "when_no_templates"
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '401':
+          description: Unauthorized - Authentication is required and has failed or has not yet been provided.
+        '403':
+          description: Forbidden - The server understood the request but refuses to authorize it.
+        '422':
+          description: Unprocessable Entity - The server understands the content type of the request entity, and the syntax of the request entity is correct, but it was unable to process the contained instructions.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+
+  /users/{userId}:
+    get:
+      summary: Get a user by ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The user with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: |
+                #set($inputRoot = $input.path('$'))
+                {
+                  "uid": "user1",
+                  "github_ID": "githubuser1",
+                  "email": "user1@example.com",
+                  "profile": {},
+                  "evaluationTracks": ["track1", "track2"]
+                }
+        passthroughBehavior: "when_no_templates"
+    put:
+      summary: Update a user by ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated successfully.
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The user with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+    delete:
+      summary: Delete a user by ID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User deleted successfully.
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The user with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+  /tracks:
+    get:
+      summary: Get a list of all tracks
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A JSON array of track objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Track'
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: |
+                #set($inputRoot = $input.path('$'))
+                [
+                  {
+                    "trackId": "track1",
+                    "trackDescription": "Description for track1",
+                    "trackName": "Track 1",
+                    "trackProgression": {
+                      "stepName": "Step 1",
+                      "stepDescription": "Description for step 1",
+                      "stepStatus": "Completed"
+                    },
+                    "projects": ["project1", "project2"]
+                  },
+                  {
+                    "trackId": "track2",
+                    "trackDescription": "Description for track2",
+                    "trackName": "Track 2",
+                    "trackProgression": {
+                      "stepName": "Step 2",
+                      "stepDescription": "Description for step 2",
+                      "stepStatus": "In Progress"
+                    },
+                    "projects": ["project3", "project4"]
+                  },
+                  # More tracks added here
+                  {
+                    "trackId": "track3",
+                    "trackDescription": "Description for track3",
+                    "trackName": "Track 3",
+                    "trackProgression": {
+                      "stepName": "Step 3",
+                      "stepDescription": "Description for step 3",
+                      "stepStatus": "Not Started"
+                    },
+                    "projects": ["project5", "project6"]
+                  },
+                  {
+                    "trackId": "track4",
+                    "trackDescription": "Description for track4",
+                    "trackName": "Track 4",
+                    "trackProgression": {
+                      "stepName": "Step 4",
+                      "stepDescription": "Description for step 4",
+                      "stepStatus": "Completed"
+                    },
+                    "projects": ["project7", "project8"]
+                  },
+                  {
+                    "trackId": "track5",
+                    "trackDescription": "Description for track5",
+                    "trackName": "Track 5",
+                    "trackProgression": {
+                      "stepName": "Step 5",
+                      "stepDescription": "Description for step 5",
+                      "stepStatus": "In Review"
+                    },
+                    "projects": ["project9", "project10"]
+                  },
+                  {
+                    "trackId": "track6",
+                    "trackDescription": "Description for track6",
+                    "trackName": "Track 6",
+                    "trackProgression": {
+                      "stepName": "Step 6",
+                      "stepDescription": "Description for step 6",
+                      "stepStatus": "On Hold"
+                    },
+                    "projects": ["project11", "project12"]
+                  }
+                  # Add additional tracks as needed
+                ]
+        passthroughBehavior: "when_no_templates"
+    post:
+      summary: Create a new track
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Track'
+      responses:
+        '201':
+          description: Track created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+  /tracks/{trackId}:
+    get:
+      summary: Get a track by ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: trackId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Track retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+        '404':
+          description: Not Found - The track with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: |
+                #set($inputRoot = $input.path('$'))
+                {
+                  "trackId": "$input.params('trackId')",
+                  "trackDescription": "Description for $input.params('trackId')",
+                  "trackName": "Name for $input.params('trackId')",
+                  "trackProgression": {
+                    "stepName": "Step for $input.params('trackId')",
+                    "stepDescription": "Step description for $input.params('trackId')",
+                    "stepStatus": "Status for $input.params('trackId')"
+                  },
+                  "projects": [
+                    "project associated with $input.params('trackId')"
+                  ]
+                }
+        passthroughBehavior: "when_no_templates"
+    put:
+      summary: Update a track by ID
+      parameters:
+        - in: path
+          name: trackId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Track'
+      responses:
+        '200':
+          description: Track updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The track with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+    delete:
+      summary: Delete a track by ID
+      parameters:
+        - in: path
+          name: trackId
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Track deleted successfully
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The track with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+  /projects:
+    get:
+      summary: Get a list of all projects
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: A JSON array of project objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '401':
+          description: Unauthorized - Authentication is required and has failed or has not yet been provided.
+        '403':
+          description: Forbidden - The server understood the request but refuses to authorize it.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+        '503':
+          description: Service Unavailable - The server is currently unable to handle the request due to a temporary overload or scheduled maintenance.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: |
+                #set($inputRoot = $input.path('$'))
+                [
+                  {
+                    "projectID": "project1",
+                    "repo_address": "https://github.com/user/project1",
+                    "projectDescription": "Description for project1",
+                    "resultsId": ["result1", "result2"]
+                  },
+                  {
+                    "projectID": "project2",
+                    "repo_address": "https://github.com/user/project2",
+                    "projectDescription": "Description for project2",
+                    "resultsId": ["result3", "result4"]
+                  },
+                  {
+                    "projectID": "project3",
+                    "repo_address": "https://github.com/user/project3",
+                    "projectDescription": "Description for project3",
+                    "resultsId": ["result5", "result6"]
+                  },
+                  {
+                    "projectID": "project4",
+                    "repo_address": "https://github.com/user/project4",
+                    "projectDescription": "Description for project4",
+                    "resultsId": ["result7", "result8"]
+                  },
+                  {
+                    "projectID": "project5",
+                    "repo_address": "https://github.com/user/project5",
+                    "projectDescription": "Description for project5",
+                    "resultsId": ["result9", "result10"]
+                  },
+                  {
+                    "projectID": "project6",
+                    "repo_address": "https://github.com/user/project6",
+                    "projectDescription": "Description for project6",
+                    "resultsId": ["result11", "result12"]
+                  }
+                  # Add additional projects as needed
+                ]
+        passthroughBehavior: "when_no_templates"
+    post:
+      summary: Create a new project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '401':
+          description: Unauthorized - Authentication is required and has failed or has not yet been provided.
+        '403':
+          description: Forbidden - The server understood the request but refuses to authorize it.
+        '422':
+          description: Unprocessable Entity - The server understands the content type of the request entity, and the syntax of the request entity is correct, but it was unable to process the contained instructions.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+  /projects/{projectId}:
+    get:
+      summary: Get a project by ID
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The project with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+      x-amazon-apigateway-integration:
+        type: mock
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 200
+            }
+        responses:
+          default:
+            statusCode: "200"
+            responseTemplates:
+              application/json: |
+                #set($inputRoot = $input.path('$'))
+                {
+                  "projectID": "$input.params('projectId')",
+                  "repo_address": "https://github.com/user/$input.params('projectId')",
+                  "projectDescription": "Description for $input.params('projectId')",
+                  "resultsId": ["resultId1", "resultId2"]
+                }
+        passthroughBehavior: "when_no_templates"
+    put:
+      summary: Update a project by ID
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '200':
+          description: Project updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The project with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+    delete:
+      summary: Delete a project by ID
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Project deleted successfully.
+        '400':
+          description: Bad Request - The request was invalid or missing parameters.
+        '404':
+          description: Not Found - The project with the specified ID was not found.
+        '500':
+          description: Internal Server Error - An unexpected condition was encountered.
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - uid
+        - email
+      properties:
+        uid:
+          type: string
+        github_ID:
+          type: string
+        email:
+          type: string
+        profile:
+          type: object
+          additionalProperties: true
+        evaluationTracks:
+          type: array
+          items:
+            type: string
+
+    Track:
+      type: object
+      required:
+        - trackId
+        - trackName
+      properties:
+        trackId:
+          type: string
+        trackDescription:
+          type: string
+        trackName:
+          type: string
+        trackProgression:
+          type: object
+          required:
+            - stepName
+            - stepStatus
+          properties:
+            stepName:
+              type: string
+            stepDescription:
+              type: string
+            stepStatus:
+              type: string
+        projects:
+          type: array
+          items:
+            type: string
+
+    Project:
+      type: object
+      required:
+        - projectID
+        - repo_address
+        - projectDescription
+      properties:
+        projectID:
+          type: string
+        repo_address:
+          type: string
+        projectDescription:
+          type: string
+        resultsId:
+          type: array
+          items:
+            type: string
+
+  securitySchemes:
+    BearerAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools
+      x-amazon-apigateway-authorizer:
+        type: cognito_user_pools
+        providerARNs:
+          - "arn:aws:cognito-idp:us-east-1:426691418260:userpool/us-east-1_RO71EiBnE"
