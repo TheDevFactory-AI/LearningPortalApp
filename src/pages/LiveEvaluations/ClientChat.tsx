@@ -10,7 +10,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import ChatWindow from '@/components/Chat/ChatWindow'
-
+import SendRoundedIcon from '@mui/icons-material/SendRounded';
 
 
 const ClientChat=()=>{
@@ -47,7 +47,7 @@ const ClientChat=()=>{
   return (
     <Card className="h-[550px] w-[850px]">
         <CardHeader>
-            <Card className="h-[50px] w-[800px] bg-blue-950">
+            <Card className="h-[50px] w-[800px] bg-blue-900">
                 <h1 className="text-white text-bold">Live Evaluation</h1>
             </Card> 
         </CardHeader>
@@ -75,14 +75,14 @@ const ClientChat=()=>{
             />
         </CardContent>
         <CardFooter>
-            <form className="w-[800px]" onSubmit={handleSubmit(sendMessage)}>
+            {/* <form className="w-[800px]" onSubmit={handleSubmit(sendMessage)}> */}
                 <Input 
                 id="message" 
                 placeholder="Send a message..." 
-                className="mr-4 text-white bg-black"
+                className="mr-2 text-white bg-black"
                 {...register('ClientMessage')}/>
-                <Button type='submit'>Confirm</Button>
-            </form>
+                <Button type='submit'><SendRoundedIcon/></Button>
+            {/* </form> */}
         </CardFooter>
     </Card>
 )
