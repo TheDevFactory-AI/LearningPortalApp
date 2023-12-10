@@ -25,7 +25,8 @@ export const MainApp =  () => {
         <LinksContainer 
         links={[
           {to:"/overview",title:"Overview"},
-          {to:"/home", title:"Go home"}
+          {to:"/home", title:"Go home"},
+          {to:"/chat", title:"Chat with client"}
         ]}/>
         <div className="pb-4">
           <ComboboxDemo/>
@@ -65,14 +66,16 @@ export const MainAppRoute=new Route({
           replace:true
         })
       }
-      console.log('before loading time !!! @/') 
       return {
         auth:resp //making auth payload available accross all child pages
       }
       },
+      /*
       load:()=>{
         console.log('loading time !!! @/') 
       }
+      */
+      
 })
 
 

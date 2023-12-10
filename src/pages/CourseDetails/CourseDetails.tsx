@@ -4,7 +4,6 @@ import { manageAccessToken } from "@/utils/Auth/Session";
 import { Route } from '@tanstack/react-router';
 import { z } from 'zod';
 import { AuthenticateUserResp } from "../Authentication/AuthUtils/Login";
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 /*
 const courseQueryOptions = ({courseId}:{courseId:number}) =>queryOptions({
@@ -22,6 +21,8 @@ const CourseDetails = ({useParams}:{useParams:any}) => {
   const {courseId} = useParams();
   //create custom hook to get the data
   //const {data}=useSuspenseQuery(courseQueryOptions({courseId}))
+
+ 
   return (
     <div>HEY {courseId}</div>
   )
@@ -52,10 +53,13 @@ const CourseDetailsRoute = new Route({
         auth:newAuthPayload
       }
     },
+    /*
     load:({params})=>{
       console.log(`loading time !!! @/course/${params.courseId}`) 
       //simply sure that data is loaded properly here
     }
+    */
+    
 
 })
 
