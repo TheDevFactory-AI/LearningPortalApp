@@ -1,9 +1,11 @@
 import { defineConfig } from 'orval';
 
+
+
 export default defineConfig({
   CodeReviewer: {
     output: {
-      mode: 'split',
+      mode: 'tags-split',
       target: 'api/endpoints/CodeReviewer.ts',
       schemas: 'api/model',
       client: 'react-query',

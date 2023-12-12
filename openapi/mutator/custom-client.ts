@@ -1,9 +1,23 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
- // custom-instance.ts
- 
 import Axios, { AxiosRequestConfig, AxiosError } from 'axios';
+import { AuthenticateUserResp } from '../../src/pages/Authentication/AuthUtils/Login';
+import { queryClient } from '../../src/App';
 
-export const AXIOS_INSTANCE = Axios.create({ baseURL: 'https://5u2uhrjsi8.execute-api.us-east-1.amazonaws.com/Test' }); // use your own URL here or environment variable
+const authMiddleware=({config}:{config:AxiosRequestConfig})=>{
+    const resp=queryClient.getQueryData(['Auth']) as AuthenticateUserResp
+    const {session}=resp
+    if(session){
+      const idToken=session.getIdToken()
+      config.headers={
+        ...config.headers,
+        Authorization: `Bearer ${idToken.getJwtToken()}`
+      }
+    }
+    console.log('config is ', config)
+    return config
+}
+
+export const AXIOS_INSTANCE = Axios.create({ baseURL: 'https://5u2uhrjsi8.execute-api.us-east-1.amazonaws.com/test' }); // use your own URL here or environment variable
 
 // add a second `options` argument here if you want to pass extra options to each generated query
 export const customClient = <T>(
@@ -11,8 +25,9 @@ export const customClient = <T>(
     options?: AxiosRequestConfig,
     ): Promise<T> => {
     const source = Axios.CancelToken.source();
+    const authConfig=authMiddleware({config})
     const promise = AXIOS_INSTANCE({
-        ...config,
+        ...authConfig,
         ...options,
         cancelToken: source.token,
     }).then(({ data }) => data);
