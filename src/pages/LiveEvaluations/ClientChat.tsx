@@ -10,17 +10,13 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import ChatWindow from '@/components/Chat/ChatWindow'
-import { useDeleteProjectsProjectId } from '../../../openapi/api/endpoints/default/default';
 
 
 
 const ClientChat=()=>{
   const [fooEvents, setFooEvents] = useState([]);
   const {register, handleSubmit, setValue}=useForm()
-  const {mutate,status }=useDeleteProjectsProjectId()
-  if(status==='success'){
-    console.log('got it !!!')
-  }
+  
 
 
 
@@ -28,7 +24,7 @@ const ClientChat=()=>{
     console.log("emitting ClientMsg: ",ClientMessage)
     socket.emit("ClientMsg",ClientMessage)
     setValue('ClientMessage','')
-    mutate({projectId:'4'})
+
   }
 
   useEffect(() => {
