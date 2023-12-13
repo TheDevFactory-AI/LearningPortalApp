@@ -8,9 +8,12 @@
 import type { UserProfile } from './userProfile';
 
 export interface User {
+  /** Email address of the user */
   email: string;
-  evaluationTracks?: string[];
+  /** GitHub identifier associated with the user */
   github_ID?: string;
+  /** A JSON object containing user profile details */
   profile?: UserProfile;
-  uid: string;
+  /** Unique identifier for the user assigned by Cognito */
+  sub: string;
 }

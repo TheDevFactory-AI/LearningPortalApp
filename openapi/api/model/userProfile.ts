@@ -6,4 +6,7 @@
  * OpenAPI spec version: 1.0.0
  */
 
+/**
+ * A JSON object containing user profile details
+ */
 export type UserProfile = { [key: string]: any };

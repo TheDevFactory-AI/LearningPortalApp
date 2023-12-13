@@ -5,12 +5,11 @@
  * API for managing users, tracks, and projects for a code evaluation platform.
  * OpenAPI spec version: 1.0.0
  */
-import type { TrackTrackProgression } from './trackTrackProgression';
+import type { TrackProgression } from './trackProgression';
 
 export interface Track {
-  projects?: string[];
-  trackDescription?: string;
+  trackDescription: string;
   trackId: string;
   trackName: string;
-  trackProgression?: TrackTrackProgression;
+  trackProgression: TrackProgression[];
 }

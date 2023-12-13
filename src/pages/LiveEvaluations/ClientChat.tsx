@@ -10,12 +10,18 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import ChatWindow from '@/components/Chat/ChatWindow'
+import { useGetProjects } from '../../../openapi/api/endpoints/default/default';
 
 
 
 const ClientChat=()=>{
   const [fooEvents, setFooEvents] = useState([]);
   const {register, handleSubmit, setValue}=useForm()
+  const {data, isSuccess}=useGetProjects()
+
+  if(isSuccess){
+    console.log('data is', {...data})
+  }
   
 
 
@@ -24,6 +30,7 @@ const ClientChat=()=>{
     console.log("emitting ClientMsg: ",ClientMessage)
     socket.emit("ClientMsg",ClientMessage)
     setValue('ClientMessage','')
+
 
   }
 

@@ -5,11 +5,9 @@
  * API for managing users, tracks, and projects for a code evaluation platform.
  * OpenAPI spec version: 1.0.0
  */
-import type { Results } from './results';
+import type { Project } from './project';
 
-export interface Project {
-  projectDescription: string;
-  projectID: string;
-  repo_address: string;
-  results: Results;
+export interface ProjectsResponse {
+  projects?: Project[];
+  sub?: string;
 }

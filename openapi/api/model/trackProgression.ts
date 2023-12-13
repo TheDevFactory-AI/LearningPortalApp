@@ -6,8 +6,9 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export type TrackTrackProgression = {
-  stepDescription?: string;
+export interface TrackProgression {
+  projects: string[];
+  stepDescription: string;
   stepName: string;
   stepStatus: string;
-};
+}

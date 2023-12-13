@@ -6,8 +6,12 @@
  * OpenAPI spec version: 1.0.0
  */
 
+export * from './metric';
 export * from './project';
+export * from './projectsResponse';
+export * from './results';
 export * from './track';
-export * from './trackTrackProgression';
+export * from './trackProgression';
+export * from './tracksResponse';
 export * from './user';
 export * from './userProfile';

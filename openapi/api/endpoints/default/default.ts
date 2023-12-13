@@ -18,8 +18,8 @@ import type {
   UseQueryResult
 } from '@tanstack/react-query'
 import type {
-  Project,
-  Track,
+  ProjectsResponse,
+  TracksResponse,
   User
 } from '../../model'
 import { customClient } from '../../../mutator/custom-client';
@@ -321,7 +321,7 @@ export const getTracks = (
 ) => {
       
       
-      return customClient<Track[]>(
+      return customClient<TracksResponse[]>(
       {url: `/tracks`, method: 'GET', signal
     },
       options);
@@ -377,14 +377,14 @@ export const useGetTracks = <TData = Awaited<ReturnType<typeof getTracks>>, TErr
  * @summary Create a new track
  */
 export const postTracks = (
-    track: BodyType<Track>,
+    tracksResponse: BodyType<TracksResponse>,
  options?: SecondParameter<typeof customClient>,) => {
       
       
-      return customClient<Track>(
+      return customClient<TracksResponse>(
       {url: `/tracks`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: track
+      data: tracksResponse
     },
       options);
     }
@@ -392,14 +392,14 @@ export const postTracks = (
 
 
 export const getPostTracksMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postTracks>>, TError,{data: BodyType<Track>}, TContext>, request?: SecondParameter<typeof customClient>}
-): UseMutationOptions<Awaited<ReturnType<typeof postTracks>>, TError,{data: BodyType<Track>}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postTracks>>, TError,{data: BodyType<TracksResponse>}, TContext>, request?: SecondParameter<typeof customClient>}
+): UseMutationOptions<Awaited<ReturnType<typeof postTracks>>, TError,{data: BodyType<TracksResponse>}, TContext> => {
  const {mutation: mutationOptions, request: requestOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postTracks>>, {data: BodyType<Track>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postTracks>>, {data: BodyType<TracksResponse>}> = (props) => {
           const {data} = props ?? {};
 
           return  postTracks(data,requestOptions)
@@ -411,14 +411,14 @@ export const getPostTracksMutationOptions = <TError = ErrorType<void>,
    return  { mutationFn, ...mutationOptions }}
 
     export type PostTracksMutationResult = NonNullable<Awaited<ReturnType<typeof postTracks>>>
-    export type PostTracksMutationBody = BodyType<Track>
+    export type PostTracksMutationBody = BodyType<TracksResponse>
     export type PostTracksMutationError = ErrorType<void>
 
     /**
  * @summary Create a new track
  */
 export const usePostTracks = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postTracks>>, TError,{data: BodyType<Track>}, TContext>, request?: SecondParameter<typeof customClient>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postTracks>>, TError,{data: BodyType<TracksResponse>}, TContext>, request?: SecondParameter<typeof customClient>}
 ) => {
 
       const mutationOptions = getPostTracksMutationOptions(options);
@@ -434,7 +434,7 @@ export const getTracksTrackId = (
 ) => {
       
       
-      return customClient<Track>(
+      return customClient<TracksResponse>(
       {url: `/tracks/${trackId}`, method: 'GET', signal
     },
       options);
@@ -491,14 +491,14 @@ export const useGetTracksTrackId = <TData = Awaited<ReturnType<typeof getTracksT
  */
 export const putTracksTrackId = (
     trackId: string,
-    track: BodyType<Track>,
+    tracksResponse: BodyType<TracksResponse>,
  options?: SecondParameter<typeof customClient>,) => {
       
       
-      return customClient<Track>(
+      return customClient<TracksResponse>(
       {url: `/tracks/${trackId}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
-      data: track
+      data: tracksResponse
     },
       options);
     }
@@ -506,14 +506,14 @@ export const putTracksTrackId = (
 
 
 export const getPutTracksTrackIdMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putTracksTrackId>>, TError,{trackId: string;data: BodyType<Track>}, TContext>, request?: SecondParameter<typeof customClient>}
-): UseMutationOptions<Awaited<ReturnType<typeof putTracksTrackId>>, TError,{trackId: string;data: BodyType<Track>}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putTracksTrackId>>, TError,{trackId: string;data: BodyType<TracksResponse>}, TContext>, request?: SecondParameter<typeof customClient>}
+): UseMutationOptions<Awaited<ReturnType<typeof putTracksTrackId>>, TError,{trackId: string;data: BodyType<TracksResponse>}, TContext> => {
  const {mutation: mutationOptions, request: requestOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof putTracksTrackId>>, {trackId: string;data: BodyType<Track>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof putTracksTrackId>>, {trackId: string;data: BodyType<TracksResponse>}> = (props) => {
           const {trackId,data} = props ?? {};
 
           return  putTracksTrackId(trackId,data,requestOptions)
@@ -525,14 +525,14 @@ export const getPutTracksTrackIdMutationOptions = <TError = ErrorType<void>,
    return  { mutationFn, ...mutationOptions }}
 
     export type PutTracksTrackIdMutationResult = NonNullable<Awaited<ReturnType<typeof putTracksTrackId>>>
-    export type PutTracksTrackIdMutationBody = BodyType<Track>
+    export type PutTracksTrackIdMutationBody = BodyType<TracksResponse>
     export type PutTracksTrackIdMutationError = ErrorType<void>
 
     /**
  * @summary Update a track by ID
  */
 export const usePutTracksTrackId = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putTracksTrackId>>, TError,{trackId: string;data: BodyType<Track>}, TContext>, request?: SecondParameter<typeof customClient>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putTracksTrackId>>, TError,{trackId: string;data: BodyType<TracksResponse>}, TContext>, request?: SecondParameter<typeof customClient>}
 ) => {
 
       const mutationOptions = getPutTracksTrackIdMutationOptions(options);
@@ -598,7 +598,7 @@ export const getProjects = (
 ) => {
       
       
-      return customClient<Project[]>(
+      return customClient<ProjectsResponse[]>(
       {url: `/projects`, method: 'GET', signal
     },
       options);
@@ -654,14 +654,14 @@ export const useGetProjects = <TData = Awaited<ReturnType<typeof getProjects>>, 
  * @summary Create a new project
  */
 export const postProjects = (
-    project: BodyType<Project>,
+    projectsResponse: BodyType<ProjectsResponse>,
  options?: SecondParameter<typeof customClient>,) => {
       
       
-      return customClient<Project>(
+      return customClient<ProjectsResponse>(
       {url: `/projects`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: project
+      data: projectsResponse
     },
       options);
     }
@@ -669,14 +669,14 @@ export const postProjects = (
 
 
 export const getPostProjectsMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postProjects>>, TError,{data: BodyType<Project>}, TContext>, request?: SecondParameter<typeof customClient>}
-): UseMutationOptions<Awaited<ReturnType<typeof postProjects>>, TError,{data: BodyType<Project>}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postProjects>>, TError,{data: BodyType<ProjectsResponse>}, TContext>, request?: SecondParameter<typeof customClient>}
+): UseMutationOptions<Awaited<ReturnType<typeof postProjects>>, TError,{data: BodyType<ProjectsResponse>}, TContext> => {
  const {mutation: mutationOptions, request: requestOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postProjects>>, {data: BodyType<Project>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postProjects>>, {data: BodyType<ProjectsResponse>}> = (props) => {
           const {data} = props ?? {};
 
           return  postProjects(data,requestOptions)
@@ -688,14 +688,14 @@ export const getPostProjectsMutationOptions = <TError = ErrorType<void>,
    return  { mutationFn, ...mutationOptions }}
 
     export type PostProjectsMutationResult = NonNullable<Awaited<ReturnType<typeof postProjects>>>
-    export type PostProjectsMutationBody = BodyType<Project>
+    export type PostProjectsMutationBody = BodyType<ProjectsResponse>
     export type PostProjectsMutationError = ErrorType<void>
 
     /**
  * @summary Create a new project
  */
 export const usePostProjects = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postProjects>>, TError,{data: BodyType<Project>}, TContext>, request?: SecondParameter<typeof customClient>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postProjects>>, TError,{data: BodyType<ProjectsResponse>}, TContext>, request?: SecondParameter<typeof customClient>}
 ) => {
 
       const mutationOptions = getPostProjectsMutationOptions(options);
@@ -711,7 +711,7 @@ export const getProjectsProjectId = (
 ) => {
       
       
-      return customClient<Project>(
+      return customClient<ProjectsResponse>(
       {url: `/projects/${projectId}`, method: 'GET', signal
     },
       options);
@@ -768,14 +768,14 @@ export const useGetProjectsProjectId = <TData = Awaited<ReturnType<typeof getPro
  */
 export const putProjectsProjectId = (
     projectId: string,
-    project: BodyType<Project>,
+    projectsResponse: BodyType<ProjectsResponse>,
  options?: SecondParameter<typeof customClient>,) => {
       
       
-      return customClient<Project>(
+      return customClient<ProjectsResponse>(
       {url: `/projects/${projectId}`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
-      data: project
+      data: projectsResponse
     },
       options);
     }
@@ -783,14 +783,14 @@ export const putProjectsProjectId = (
 
 
 export const getPutProjectsProjectIdMutationOptions = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putProjectsProjectId>>, TError,{projectId: string;data: BodyType<Project>}, TContext>, request?: SecondParameter<typeof customClient>}
-): UseMutationOptions<Awaited<ReturnType<typeof putProjectsProjectId>>, TError,{projectId: string;data: BodyType<Project>}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putProjectsProjectId>>, TError,{projectId: string;data: BodyType<ProjectsResponse>}, TContext>, request?: SecondParameter<typeof customClient>}
+): UseMutationOptions<Awaited<ReturnType<typeof putProjectsProjectId>>, TError,{projectId: string;data: BodyType<ProjectsResponse>}, TContext> => {
  const {mutation: mutationOptions, request: requestOptions} = options ?? {};
 
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof putProjectsProjectId>>, {projectId: string;data: BodyType<Project>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof putProjectsProjectId>>, {projectId: string;data: BodyType<ProjectsResponse>}> = (props) => {
           const {projectId,data} = props ?? {};
 
           return  putProjectsProjectId(projectId,data,requestOptions)
@@ -802,14 +802,14 @@ export const getPutProjectsProjectIdMutationOptions = <TError = ErrorType<void>,
    return  { mutationFn, ...mutationOptions }}
 
     export type PutProjectsProjectIdMutationResult = NonNullable<Awaited<ReturnType<typeof putProjectsProjectId>>>
-    export type PutProjectsProjectIdMutationBody = BodyType<Project>
+    export type PutProjectsProjectIdMutationBody = BodyType<ProjectsResponse>
     export type PutProjectsProjectIdMutationError = ErrorType<void>
 
     /**
  * @summary Update a project by ID
  */
 export const usePutProjectsProjectId = <TError = ErrorType<void>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putProjectsProjectId>>, TError,{projectId: string;data: BodyType<Project>}, TContext>, request?: SecondParameter<typeof customClient>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putProjectsProjectId>>, TError,{projectId: string;data: BodyType<ProjectsResponse>}, TContext>, request?: SecondParameter<typeof customClient>}
 ) => {
 
       const mutationOptions = getPutProjectsProjectIdMutationOptions(options);
