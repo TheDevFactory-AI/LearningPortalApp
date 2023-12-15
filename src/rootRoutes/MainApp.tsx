@@ -46,7 +46,7 @@ export const MainApp =  () => {
         <PressableButton onPress={logOut}>Log out</PressableButton>
       </div>
     </SideBar>
-    <div className="p-8 sm:ml-64">
+    <div className="sm:ml-64">
         <Outlet />
     </div>
     </>

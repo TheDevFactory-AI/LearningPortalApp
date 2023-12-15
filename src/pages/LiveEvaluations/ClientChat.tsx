@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import ChatWindow from '@/components/Chat/ChatWindow'
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
+import Title from '@/components/ui/Title'
+//import base_icon_white_background from "../../assets/base_icon_white_background.png"
 
 
 const ClientChat=()=>{
@@ -45,10 +47,11 @@ const ClientChat=()=>{
   }, [fooEvents]);
   
   return (
-    <Card className="h-[550px] w-[850px]">
+    <div className="flex flex-col justify-center flex items-center h-screen bg-cyan-50">
+      <Card className="h-[700px] w-[850px] bg-white">
         <CardHeader>
-            <Card className="h-[50px] w-[800px] bg-blue-900">
-                <h1 className="text-white text-bold">Live Evaluation</h1>
+            <Card className="h-[50px] w-[800px] bg-cyan-500 flex flex-col justify-center items-center">
+                <Title>Live Evaluation</Title>
             </Card> 
         </CardHeader>
         <CardContent>
@@ -75,16 +78,18 @@ const ClientChat=()=>{
             />
         </CardContent>
         <CardFooter>
-            {/* <form className="w-[800px]" onSubmit={handleSubmit(sendMessage)}> */}
+            <form className="w-[800px] flex flex-row" onSubmit={handleSubmit(sendMessage)}>
                 <Input 
                 id="message" 
                 placeholder="Send a message..." 
                 className="mr-2 text-white bg-black"
                 {...register('ClientMessage')}/>
                 <Button type='submit'><SendRoundedIcon/></Button>
-            {/* </form> */}
+            </form>
         </CardFooter>
-    </Card>
+      </Card>
+    </div>
+    
 )
 }
 

@@ -10,7 +10,7 @@ import MessageBubble, { ChatBubbleProp } from "./MessageBubble"
 const ChatWindow=({conversation}:{conversation:ChatBubbleProp[]})=>{
     const showChat=conversation && conversation.length
     return (
-        <Card className="h-[350px] w-[800px] bg-black  overflow-auto p-4">
+        <Card className="h-[500px] w-[800px] bg-black  overflow-auto p-4">
         {showChat && conversation.map(({from,text})=>{
             return <MessageBubble  from={from} text={text}/>
         }

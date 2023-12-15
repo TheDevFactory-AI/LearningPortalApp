@@ -23,7 +23,7 @@ const TabsWrapper = ({tabsComponents,defaultValue,disabled}:TabsWrapperProps) =>
             {tabsComponents.map((tab,index)=>{
               const {tabsTitle}=tab;
               return(
-                <TabsTrigger className="flex-grow"  disabled={disabled} key={index} value={tabsTitle}>
+                <TabsTrigger className="flex-grow" disabled={disabled} key={index} value={tabsTitle}>
                   {tabsTitle}
                 </TabsTrigger>
               )

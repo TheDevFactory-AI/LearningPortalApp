@@ -9,8 +9,8 @@ export type PieChartDisplayerProp={
 const PieChartDisplayer = ({data}:{data:[PieChartDisplayerProp] | [PieChartDisplayerProp,PieChartDisplayerProp]}) => {
     const dataLength=data.length
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <PieChart width={530} height={200}>
+    
+      <PieChart width={200} height={200}>
           <Pie 
           data={data[0].metricData} 
           dataKey="total" 
@@ -18,12 +18,12 @@ const PieChartDisplayer = ({data}:{data:[PieChartDisplayerProp] | [PieChartDispl
           cx="50%" 
           cy="50%" 
           outerRadius={50} 
-          fill="#82ca9d" label />
+          fill="#c6f702" />
       {
-        dataLength===2 && <Pie data={data[1].metricData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={70} outerRadius={90} fill="#82ca9d" label />
+        dataLength===2 && <Pie data={data[1].metricData} dataKey="total" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} fill="#02f7ef"  />
       }
       </PieChart>
-    </ResponsiveContainer>
+     
   )
 }
 
