@@ -47,14 +47,14 @@ const ClientChat=()=>{
   }, [fooEvents]);
   
   return (
-    <div className="flex flex-col justify-center flex items-center h-screen bg-cyan-50">
-      <Card className="h-[700px] w-[850px] bg-white">
-        <CardHeader>
-            <Card className="h-[50px] w-[800px] bg-cyan-500 flex flex-col justify-center items-center">
+    <div className="flex flex-auto flex-row justify-center flex items-center h-screen bg-blue-950">
+      <Card className="flex flex-col h-[700px] w-[1000px] bg-white">
+        <CardHeader className="basis-3/12">
+            <Card className="flex grow justify-center items-center bg-blue-500">
                 <Title>Live Evaluation</Title>
             </Card> 
         </CardHeader>
-        <CardContent>
+        <CardContent className="basis-8/12">
             <ChatWindow 
             conversation={[
               {"from": "Bot", "text": "Hey"},
@@ -77,12 +77,12 @@ const ClientChat=()=>{
             ]}
             />
         </CardContent>
-        <CardFooter>
-            <form className="w-[800px] flex flex-row" onSubmit={handleSubmit(sendMessage)}>
+        <CardFooter className="flex">
+            <form className="flex grow" onSubmit={handleSubmit(sendMessage)}>
                 <Input 
                 id="message" 
                 placeholder="Send a message..." 
-                className="mr-2 text-white bg-black"
+                className="flex-1 mr-2 text-white bg-black"
                 {...register('ClientMessage')}/>
                 <Button type='submit'><SendRoundedIcon/></Button>
             </form>

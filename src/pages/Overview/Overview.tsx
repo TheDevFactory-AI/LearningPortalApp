@@ -13,6 +13,9 @@ import { Card, CardTitle, CardContent } from "@/components/ui/card"
 import PieChartDisplayer from "@/components/ui/Pie"
 import { BarChartDisplayer } from "@/components/ui/BarChart"
 import { data01, data02, barChartData } from "@/mockData/ChartData"
+import Title from "@/components/ui/Title"
+import Timeline from "./Timeline"
+import { projectsList } from "@/mockData/projects"
 
 
 function AccordionDemo() {
@@ -51,44 +54,95 @@ function AccordionDemo() {
 
 const Overview=()=>{
   return (
-    <div className="p-4 bg-cyan-50 min-h-screen">
+    <div className="flex flex-col p-4 bg-blue-950 min-h-screen">
     {/* <AccordionDemo />  */}
+      <div className="flex pl-4 ">
+        <Title>Overview</Title>
+      </div>
+      
+      <div className="grid grid-cols-3">
+        
+        <div className="flex flex-col basis-1/3">
+          <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+            <CardTitle className="flex text-white">
+              <Title>Title</Title>
+            </CardTitle>
+            <CardContent className="flex justify-center items-center m-8">
+              <PieChartDisplayer data={[data01, data02]}/>
+            </CardContent>
+          </Card>
+          <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+            <CardTitle className="flex text-white">
+              <Title>Title</Title>
+            </CardTitle>
+            <CardContent className="flex justify-center items-center m-4">
+              <BarChartDisplayer data={barChartData}/>
+            </CardContent>
+          </Card>
+        </div>
 
-    <div className="flex">
-      <Card className="h-[350px] w-2/3 m-4 p-4 bg-white">
-        <CardTitle className="flex justify-center items-center">Pie Chart</CardTitle>
-        <CardContent className="flex justify-center items-center m-8">
-          <PieChartDisplayer data={[data01, data02]}/>
-        </CardContent>
-      </Card>
-      <Card className="h-[350px] w-1/3 m-4 p-4 bg-white">
-        <CardTitle className="flex justify-center items-center">Pie Chart</CardTitle>
-        <CardContent className="flex justify-center items-center m-4">
-          <PieChartDisplayer data={[data02]}/>
-        </CardContent>
-      </Card>
-    </div>
-    <div className="flex">
-      <Card className="h-[350px] w-[450px] m-4 p-4 bg-white">
-        <CardTitle className="flex justify-center items-center">Bar Chart</CardTitle>
-        <CardContent className="flex pt-8 justify-center items-center">
-          <BarChartDisplayer data={barChartData}/>
-        </CardContent>
-      </Card>
-      <Card className="h-[350px] w-[450px] m-4 p-4 bg-white">
-        <CardTitle className="flex justify-center items-center">Bar Chart</CardTitle>
-        <CardContent className="flex pt-8 justify-center items-center">
-          <BarChartDisplayer data={barChartData}/>
-        </CardContent>
-      </Card>
-      <Card className="h-[350px] w-[450px] m-4 p-4 bg-white">
-        <CardTitle className="flex justify-center items-center">Bar Chart</CardTitle>
-        <CardContent className="flex pt-8 justify-center items-center">
-          <BarChartDisplayer data={barChartData}/>
-        </CardContent>
-      </Card>
-    </div>
-    
+        <div className="flex flex-col basis-1/3">
+          <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+            <CardTitle className="flex text-white">
+              <Title>Title</Title>
+            </CardTitle>
+            <CardContent className="flex justify-center items-center m-8">
+              <PieChartDisplayer data={[data02, data01]}/>
+            </CardContent>
+          </Card>
+          <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+            <CardTitle className="flex text-white">
+              <Title>Title</Title>
+            </CardTitle>
+            <CardContent className="flex justify-center items-center m-4">
+              <BarChartDisplayer data={barChartData}/>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="flex flex-col basis-1/3">
+          {/* <div className="flex basis-1/2"> */}
+            <Timeline projects={projectsList}/>
+          {/* </div> */}
+
+          <div className="flex flex-row basis-1/2">
+            <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+              <CardTitle className="flex text-white">
+                <Title>Title</Title>
+              </CardTitle>
+              <CardContent className="flex pt-8 justify-center items-center">
+                1ms
+              </CardContent>
+            </Card>
+            <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+              <CardTitle className="flex text-white">
+                <Title>Title</Title>
+              </CardTitle>
+              <CardContent className="flex pt-8 justify-center items-center">
+                1ms
+              </CardContent>
+            </Card>
+          </div>
+          <div className="flex flex-row basis-1/2">
+            <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+              <CardTitle className="flex text-white">
+                <Title>Title</Title>
+              </CardTitle>
+              <CardContent className="flex pt-8 justify-center items-center">
+                1ms
+              </CardContent>
+            </Card>
+            <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+              <CardTitle className="flex text-white">
+                <Title>Title</Title>
+              </CardTitle>
+              <CardContent className="flex pt-8 justify-center items-center">
+                1ms
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

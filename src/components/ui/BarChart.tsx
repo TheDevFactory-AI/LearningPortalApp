@@ -9,7 +9,7 @@ export type MetricData={
 export const BarChartDisplayer = ({data}:{data:MetricData[]}) => {
   return (
     <ResponsiveContainer width="100%" height={250}>
-      <BarChart data={data}>
+      <BarChart data={data} margin={{ top: 20, right: 5, bottom: -10, left: -25 }}>
         <XAxis
           dataKey="name"
           stroke="#888888"

@@ -31,7 +31,7 @@ export const MainApp =  () => {
         <div className="pb-4">
           <ComboboxDemo/>
         </div>
-        <div className="pb-4">
+        <div className="w-[200px] pl-4 border-none rounded hover:bg-blue-400">
         <Link 
           to={'course/$courseId'}
           params={{courseId:1}}
