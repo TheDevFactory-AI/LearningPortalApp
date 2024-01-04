@@ -10,7 +10,7 @@ type projectsProp = {
 const Timeline=({projects}:{projects: projectsProp[]})=>{
   return (
     <>
-        <Card className="flex flex-col basis-1/2 m-4 p-4 bg-blue-700">
+        <Card className="flex flex-col basis-1/2 m-4 p-4 bg-blue-700 border-none">
             <CardTitle className="flex justify-center items-center text-white">
                 <Title>Timeline</Title>
             </CardTitle>

@@ -6,7 +6,8 @@ import PressableButton from "@/components/ui/pressableButton"
 import { AuthenticateUserResp } from "@/pages/Authentication/AuthUtils/Login"
 import { Outlet,Link, Route, redirect, useNavigate } from "@tanstack/react-router"
 import { useQueryClient } from "@tanstack/react-query"
-
+import Title from "@/components/ui/Title"
+import Header from "@/components/ui/Header"
 
 export const MainApp =  () => {
   const navigate=useNavigate({from:'/'})
@@ -21,6 +22,9 @@ export const MainApp =  () => {
   return (
     <>
     <SideBar>
+      <div className="mb-5 ml-2">
+        <Header>THE DEV</Header>
+      </div>
       <div className="basis-10/12">
         <LinksContainer 
         links={[

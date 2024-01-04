@@ -14,6 +14,7 @@ import PieChartDisplayer from "@/components/ui/Pie"
 import { BarChartDisplayer } from "@/components/ui/BarChart"
 import { data01, data02, barChartData } from "@/mockData/ChartData"
 import Title from "@/components/ui/Title"
+import Header from "@/components/ui/Header"
 import Timeline from "./Timeline"
 import { projectsList } from "@/mockData/projects"
 
@@ -57,13 +58,13 @@ const Overview=()=>{
     <div className="flex flex-col p-4 bg-blue-950 min-h-screen">
     {/* <AccordionDemo />  */}
       <div className="flex pl-4 ">
-        <Title>Overview</Title>
+        <Header>Overview</Header>
       </div>
       
       <div className="grid grid-cols-3">
         
         <div className="flex flex-col basis-1/3">
-          <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+          <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
             <CardTitle className="flex text-white">
               <Title>Title</Title>
             </CardTitle>
@@ -71,7 +72,7 @@ const Overview=()=>{
               <PieChartDisplayer data={[data01, data02]}/>
             </CardContent>
           </Card>
-          <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+          <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
             <CardTitle className="flex text-white">
               <Title>Title</Title>
             </CardTitle>
@@ -82,7 +83,7 @@ const Overview=()=>{
         </div>
 
         <div className="flex flex-col basis-1/3">
-          <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+          <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
             <CardTitle className="flex text-white">
               <Title>Title</Title>
             </CardTitle>
@@ -90,7 +91,7 @@ const Overview=()=>{
               <PieChartDisplayer data={[data02, data01]}/>
             </CardContent>
           </Card>
-          <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+          <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
             <CardTitle className="flex text-white">
               <Title>Title</Title>
             </CardTitle>
@@ -106,7 +107,7 @@ const Overview=()=>{
           {/* </div> */}
 
           <div className="flex flex-row basis-1/2">
-            <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+            <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
               <CardTitle className="flex text-white">
                 <Title>Title</Title>
               </CardTitle>
@@ -114,7 +115,7 @@ const Overview=()=>{
                 1ms
               </CardContent>
             </Card>
-            <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+            <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
               <CardTitle className="flex text-white">
                 <Title>Title</Title>
               </CardTitle>
@@ -124,7 +125,7 @@ const Overview=()=>{
             </Card>
           </div>
           <div className="flex flex-row basis-1/2">
-            <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+            <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
               <CardTitle className="flex text-white">
                 <Title>Title</Title>
               </CardTitle>
@@ -132,7 +133,7 @@ const Overview=()=>{
                 1ms
               </CardContent>
             </Card>
-            <Card className="basis-1/2 m-4 p-4 bg-blue-700">
+            <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
               <CardTitle className="flex text-white">
                 <Title>Title</Title>
               </CardTitle>
