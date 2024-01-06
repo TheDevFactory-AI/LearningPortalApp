@@ -6,7 +6,6 @@ import PressableButton from "@/components/ui/pressableButton"
 import { AuthenticateUserResp } from "@/pages/Authentication/AuthUtils/Login"
 import { Outlet,Link, Route, redirect, useNavigate } from "@tanstack/react-router"
 import { useQueryClient } from "@tanstack/react-query"
-import Title from "@/components/ui/Title"
 import Header from "@/components/ui/Header"
 
 export const MainApp =  () => {

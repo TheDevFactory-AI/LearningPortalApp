@@ -1,11 +1,5 @@
 import { PieChartDisplayerProp } from "@/components/ui/PieChart"
-import { MetricData } from "@/components/ui/BarChart"
 
-/* type PieChartDisplayerProp={
-  metricDataName:string,
-  metricData:MetricData[]
-}
- */
 export const data01: PieChartDisplayerProp = {metricDataName: "Data1", metricData: [
         { name: 'Group A', total: 400 },
         { name: 'Group B', total: 300 },
