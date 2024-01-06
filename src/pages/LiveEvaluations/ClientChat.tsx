@@ -6,12 +6,11 @@ import { manageAccessToken } from '@/utils/Auth/Session'
 import socket from '@/utils/Websocket/socket'
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import ChatWindow from '@/components/Chat/ChatWindow'
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import Title from '@/components/ui/Title'
 import Header from "@/components/ui/Header"
 //import base_icon_white_background from "../../assets/base_icon_white_background.png"
 

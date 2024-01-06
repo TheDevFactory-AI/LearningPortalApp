@@ -1,4 +1,4 @@
-import { PieChart, Pie, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie } from 'recharts';
 import { MetricData } from './BarChart';
 
 export type PieChartDisplayerProp={
