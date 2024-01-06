@@ -4,6 +4,7 @@ import { AuthenticateUserResp, SignIn } from "@/pages/Authentication/AuthUtils/L
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import { CognitoRefreshToken, CognitoUser, CognitoUserSession } from "amazon-cognito-identity-js";
 import { executeWithin10Minutes } from "./SessionTime";
+import { signUp } from "@/pages/Authentication/AuthUtils/Signup";
 
 /**
  * @Session How it works =>
@@ -64,8 +65,8 @@ export const manageAccessToken=async ({AuthPayload}:{AuthPayload:AuthenticateUse
         throw Error ('Error renewing token')
     }}
     
-
-
-
-
-export const manageRefreshToken=()=>{}
+export const useSignUp=()=>{
+    return useMutation({
+        mutationFn:signUp
+    })
+}
