@@ -1,4 +1,4 @@
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import { Card, CardTitle, CardContent } from '@/components/ui/card';
 
 type projectsProp = {

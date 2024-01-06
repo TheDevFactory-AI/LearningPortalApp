@@ -6,8 +6,10 @@ import { Card, CardTitle, CardContent } from "@/components/ui/card"
 import PieChartDisplayer from "@/components/ui/Pie"
 import { BarChartDisplayer } from "@/components/ui/BarChart"
 import { data01, data02, barChartData } from "@/mockData/ChartData"
-import Title from "@/components/ui/Title"
-import Header from "@/components/ui/Header"
+import {TitleSmall, Title, Header} from "@/components/ui/Title"
+//import Title from "@/components/ui/Title"
+//import Header from "@/components/ui/Title"
+//import Header from "@/components/ui/Header"
 import Timeline from "./Timeline"
 import { projectsList } from "@/mockData/projects"
 
@@ -24,7 +26,7 @@ const Overview=()=>{
         <div className="flex flex-col basis-1/3">
           <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
             <CardTitle className="flex text-white">
-              <Title>Title</Title>
+              <Title>Technical Proficiency</Title>
             </CardTitle>
             <CardContent className="flex justify-center items-center m-8">
               <PieChartDisplayer data={[data01, data02]}/>
@@ -67,36 +69,36 @@ const Overview=()=>{
           <div className="flex flex-row basis-1/2">
             <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
               <CardTitle className="flex text-white">
-                <Title>Title</Title>
+                <TitleSmall>Code Quality and Efficiency</TitleSmall>
               </CardTitle>
               <CardContent className="flex pt-8 justify-center items-center">
-                1ms
+                8.5/10
               </CardContent>
             </Card>
             <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
               <CardTitle className="flex text-white">
-                <Title>Title</Title>
+                <TitleSmall>Problem-Solving Skills</TitleSmall>
               </CardTitle>
               <CardContent className="flex pt-8 justify-center items-center">
-                1ms
+                8.0/10
               </CardContent>
             </Card>
           </div>
           <div className="flex flex-row basis-1/2">
             <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
               <CardTitle className="flex text-white">
-                <Title>Title</Title>
+                <TitleSmall>Project Management</TitleSmall>
               </CardTitle>
               <CardContent className="flex pt-8 justify-center items-center">
-                1ms
+                7.4/10
               </CardContent>
             </Card>
             <Card className="basis-1/2 m-4 p-4 bg-blue-700 border-none">
               <CardTitle className="flex text-white">
-                <Title>Title</Title>
+                <TitleSmall>Communication Skills</TitleSmall>
               </CardTitle>
               <CardContent className="flex pt-8 justify-center items-center">
-                1ms
+                9.0/10
               </CardContent>
             </Card>
           </div>
