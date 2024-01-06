@@ -1,4 +1,4 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, CartesianGrid } from "recharts"
 
 export type MetricData={
   //refactor this
@@ -10,21 +10,22 @@ export const BarChartDisplayer = ({data}:{data:MetricData[]}) => {
   return (
     <ResponsiveContainer width="100%" height={250}>
       <BarChart data={data} margin={{ top: 20, right: 5, bottom: -10, left: -25 }}>
+      <CartesianGrid strokeDasharray="4" />
         <XAxis
           dataKey="name"
-          stroke="#888888"
+          stroke="black"
           fontSize={12}
           tickLine={false}
           axisLine={false}
         />
         <YAxis
-          stroke="#888888"
+          stroke="black"
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          tickFormatter={(value) => `$${value}`}
+          tickFormatter={(value) => `${value}`}
         />
-        <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
+        <Bar dataKey="total" fill="#02f7ef" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   )

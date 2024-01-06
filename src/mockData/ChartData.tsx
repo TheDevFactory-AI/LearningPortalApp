@@ -5,7 +5,8 @@ export const data01: PieChartDisplayerProp = {metricDataName: "Data1", metricDat
         { name: 'Group B', total: 300 },
         { name: 'Group C', total: 300 },
         { name: 'Group D', total: 200 },
-      ]}
+      ]
+    }
 
 export const data02: PieChartDisplayerProp = {metricDataName: "Data2", metricData: [
         { name: 'A1', total: 100 },
@@ -19,15 +20,21 @@ export const data02: PieChartDisplayerProp = {metricDataName: "Data2", metricDat
         { name: 'C2', total: 200 },
         { name: 'D1', total: 150 },
         { name: 'D2', total: 50 },
-      ]}
+      ]
+    }
   
 
 export const barChartData = [
-    {name: "Mon", total: 17}, 
-    {name: "Tue", total: 250}, 
-    {name: "Wed", total: 38}, 
-    {name: "Thu", total: 62}, 
-    {name: "Fri", total: 15},
-    {name: "Sat", total: 93},
-    {name: "Sun", total: 84}
+    {name: "React", total: 70}, 
+    {name: "JS", total: 100}, 
+    {name: "TS", total: 97},
+    {name: "CSS", total: 93},
+  ]
+
+export const barChartData2 = [
+    {name: "MongoDB", total: 86}, 
+    {name: "SQL", total: 94}, 
+    {name: "NoSQL", total: 97},
+    {name: "AWS", total: 93},
+    {name: "NodeJS", total: 84}
   ]
