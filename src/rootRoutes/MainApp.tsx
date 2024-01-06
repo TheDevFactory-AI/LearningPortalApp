@@ -6,7 +6,7 @@ import PressableButton from "@/components/ui/pressableButton"
 import { AuthenticateUserResp } from "@/pages/Authentication/AuthUtils/Login"
 import { Outlet,Link, Route, redirect, useNavigate } from "@tanstack/react-router"
 import { useQueryClient } from "@tanstack/react-query"
-
+import Header from "@/components/ui/Header"
 
 export const MainApp =  () => {
   const navigate=useNavigate({from:'/'})
@@ -21,6 +21,9 @@ export const MainApp =  () => {
   return (
     <>
     <SideBar>
+      <div className="mb-5 ml-2">
+        <Header>THE DEV</Header>
+      </div>
       <div className="basis-10/12">
         <LinksContainer 
         links={[
@@ -31,7 +34,7 @@ export const MainApp =  () => {
         <div className="pb-4">
           <ComboboxDemo/>
         </div>
-        <div className="pb-4">
+        <div className="w-[200px] pl-4 border-none rounded hover:bg-blue-400">
         <Link 
           to={'course/$courseId'}
           params={{courseId:1}}
@@ -46,7 +49,7 @@ export const MainApp =  () => {
         <PressableButton onPress={logOut}>Log out</PressableButton>
       </div>
     </SideBar>
-    <div className="p-8 sm:ml-64">
+    <div className="sm:ml-64">
         <Outlet />
     </div>
     </>

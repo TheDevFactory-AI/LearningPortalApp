@@ -24,7 +24,7 @@ const CourseDetails = ({useParams}:{useParams:any}) => {
 
  
   return (
-    <div>HEY {courseId}</div>
+    <div className="flex flex-col justify-center flex items-center h-screen bg-blue-950">HEY {courseId}</div>
   )
 }
 

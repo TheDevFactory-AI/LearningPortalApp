@@ -9,9 +9,11 @@ const LinksContainer = ({links}:{links:LinkProps[]}) => {
     links.map((link, index)=>{
         return(
         <div className="pb-4" key={index}>
-        <Link to={link.to} className="[&.active]:font-bold text-white">
-          {link.title}
-        </Link>
+          <div className="w-[200px] pl-4 border-none rounded hover:bg-blue-400">
+            <Link to={link.to} className="[&.active]:font-bold text-white">
+              {link.title}
+            </Link>
+          </div>
         </div>
         )
 
