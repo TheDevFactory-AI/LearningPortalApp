@@ -13,16 +13,29 @@ import ChatWindow from '@/components/Chat/ChatWindow'
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import Header from "@/components/ui/Header"
 //import base_icon_white_background from "../../assets/base_icon_white_background.png"
+import { ChatBubbleProp } from '@/components/Chat/MessageBubble'
 
 
 const ClientChat=()=>{
-  const [fooEvents, setFooEvents] = useState([]);
+  const [chatMessage, setChatMessage] = useState<ChatBubbleProp[]>([]);
   const {register, handleSubmit, setValue}=useForm()
+
+
 
   const sendMessage=({ClientMessage}:any)=>{
     console.log("emitting ClientMsg: ",ClientMessage)
     socket.emit("ClientMsg",ClientMessage)
     setValue('ClientMessage','')
+    setChatMessage((chatMessage)=>[
+      ...chatMessage,
+      {
+        from:'Me',
+        text:ClientMessage
+      }
+    ])
+
+
+
   }
 
   useEffect(() => {
@@ -35,16 +48,22 @@ const ClientChat=()=>{
   }, []);
 
   useEffect(() => {
-    const onMessage=(value:any)=>{
-      setFooEvents(fooEvents.concat(value));
+    const onMessage=(value:string)=>{
+      setChatMessage((chatMessage)=>[
+        ...chatMessage,
+        {
+          from:'Bot',
+          text:value
+        }
+      ])
     }
 
-    socket.on('message', onMessage);
+    socket.on('BotMessage', onMessage);
 
     return () => {
-      socket.off('message', onMessage);
+      socket.off('BotMessage', onMessage);
     };
-  }, [fooEvents]);
+  }, [chatMessage]);
   
   return (
     <div className="flex flex-auto flex-col justify-center flex items-center h-screen py-4 bg-blue-950 border">
@@ -60,25 +79,7 @@ const ClientChat=()=>{
         </CardHeader> */}
         <CardContent className="basis-8/12 p-1">
             <ChatWindow 
-            conversation={[
-              {"from": "Bot", "text": "Hey"},
-              {"from": "Me", "text": "Good morning! Could you help me with my code?"},
-              {"from": "Bot", "text": "Of course! Please provide me with the details."},
-              {"from": "Me", "text": "I'm having trouble with a loop in Python."},
-              {"from": "Bot", "text": "I see. Can you show me the code snippet you're struggling with?"},
-              {"from": "Me", "text": "Sure, here it is: for i in range(10): print(i)"},
-              {"from": "Bot", "text": "Your loop looks fine. Are you getting any error messages?"},
-              {"from": "Me", "text": "No, but it doesn't produce the output I expect."},
-              {"from": "Bot", "text": "Let's debug it together. What output are you expecting?"},
-              {"from": "Me", "text": "I want it to print each number on a new line, but it's printing them all on the same line."},
-              {"from": "Bot", "text": "Ah, I see. It's because you're using Python 2, where print is a statement and not a function. Try adding from __future__ import print_function at the top of your file."},
-              {"from": "Me", "text": "That worked, thanks! Now, how can I make it print only even numbers?"},
-              {"from": "Bot", "text": "You can add a condition inside the loop to check if the number is even by using the modulus operator. For example: for i in range(10): if i % 2 == 0: print(i)"},
-              {"from": "Me", "text": "Awesome, got it. What if I want to store these even numbers in a list?"},
-              {"from": "Bot", "text": "You can create an empty list before the loop and then append each even number to the list inside the loop. Like this: even_numbers = [] for i in range(10): if i % 2 == 0: even_numbers.append(i)"},
-              {"from": "Me", "text": "Perfect, thanks for all the help, Bot!"},
-              {"from": "Bot", "text": "You're welcome! Don't hesitate to ask if you have more questions."}
-            ]}
+            conversation={chatMessage}
             />
         </CardContent>
         <CardFooter className="flex p-1">

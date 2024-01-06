@@ -47,44 +47,41 @@ paths:
                 #set($inputRoot = $input.path('$'))
                 [
                   {
-                    "uid": "user1",
-                    "github_ID": "githubuser1",
-                    "email": "user1@example.com",
-                    "profile": {},
-                    "evaluationTracks": ["track1", "track2"]
+                    "sub": "user-123",
+                    "github_ID": "github123",
+                    "email": "user123@example.com",
+                    "profile": { "additionalProperty1": "value1" }
                   },
                   {
-                    "uid": "user2",
-                    "github_ID": "githubuser2",
-                    "email": "user2@example.com",
-                    "profile": {},
-                    "evaluationTracks": ["track3", "track4"]
+                    "sub": "user-456",
+                    "github_ID": "github456",
+                    "email": "user456@example.com",
+                    "profile": { "additionalProperty2": "value2" }
                   },
                   {
-                    "uid": "user3",
-                    "github_ID": "githubuser3",
-                    "email": "user3@example.com",
-                    "profile": {},
-                    "evaluationTracks": ["track5", "track6"]
+                    "sub": "user-789",
+                    "github_ID": "github789",
+                    "email": "user789@example.com",
+                    "profile": { "additionalProperty3": "value3" }
                   },
                   {
-                    "uid": "user4",
-                    "github_ID": "githubuser4",
-                    "email": "user4@example.com",
-                    "profile": {},
-                    "evaluationTracks": ["track7", "track8"]
+                    "sub": "user-101",
+                    "github_ID": "github101",
+                    "email": "user101@example.com",
+                    "profile": { "additionalProperty4": "value4" }
                   },
                   {
-                    "uid": "user5",
-                    "github_ID": "githubuser5",
-                    "email": "user5@example.com",
-                    "profile": {},
-                    "evaluationTracks": ["track9", "track10"]
-                  },
+                    "sub": "user-102",
+                    "github_ID": "github102",
+                    "email": "user102@example.com",
+                    "profile": { "additionalProperty5": "value5" }
+                  }
                 ]
-        passthroughBehavior: "when_no_templates"
+        passthroughBehavior: "when_no_match"
     post:
       summary: Create a new user
+      security:
+        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -164,15 +161,16 @@ paths:
               application/json: |
                 #set($inputRoot = $input.path('$'))
                 {
-                  "uid": "user1",
-                  "github_ID": "githubuser1",
-                  "email": "user1@example.com",
-                  "profile": {},
-                  "evaluationTracks": ["track1", "track2"]
-                }
+                  "sub": "user-456",
+                  "github_ID": "github456",
+                  "email": "user456@example.com",
+                  "profile": { "additionalProperty2": "value2" }
+                },
         passthroughBehavior: "when_no_templates"
     put:
       summary: Update a user by ID
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: userId
@@ -212,6 +210,8 @@ paths:
         passthroughBehavior: "when_no_templates"
     delete:
       summary: Delete a user by ID
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: userId
@@ -257,7 +257,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Track'
+                  $ref: '#/components/schemas/TracksResponse'
         '500':
           description: Internal Server Error - An unexpected condition was encountered.
       x-amazon-apigateway-integration:
@@ -273,92 +273,94 @@ paths:
             responseTemplates:
               application/json: |
                 #set($inputRoot = $input.path('$'))
-                [
-                  {
-                    "trackId": "track1",
-                    "trackDescription": "Description for track1",
-                    "trackName": "Track 1",
-                    "trackProgression": {
-                      "stepName": "Step 1",
-                      "stepDescription": "Description for step 1",
-                      "stepStatus": "Completed"
+                {
+                  "sub": "subscription-id",
+                  "tracks": [
+                    {
+                      "trackId": "track-001",
+                      "trackDescription": "Introduction to Programming",
+                      "trackName": "Beginner Programming",
+                      "trackProgression": [
+                        {
+                          "stepName": "Setup",
+                          "stepDescription": "Setting up the development environment",
+                          "stepStatus": "Completed",
+                          "projects": ["proj-101", "proj-102"]
+                        }
+                      ]
                     },
-                    "projects": ["project1", "project2"]
-                  },
-                  {
-                    "trackId": "track2",
-                    "trackDescription": "Description for track2",
-                    "trackName": "Track 2",
-                    "trackProgression": {
-                      "stepName": "Step 2",
-                      "stepDescription": "Description for step 2",
-                      "stepStatus": "In Progress"
+                    {
+                      "trackId": "track-002",
+                      "trackDescription": "Intermediate Python",
+                      "trackName": "Python Mastery",
+                      "trackProgression": [
+                        {
+                          "stepName": "Data Types",
+                          "stepDescription": "Understanding various data types in Python",
+                          "stepStatus": "In Progress",
+                          "projects": ["proj-201"]
+                        }
+                      ]
                     },
-                    "projects": ["project3", "project4"]
-                  },
-                  # More tracks added here
-                  {
-                    "trackId": "track3",
-                    "trackDescription": "Description for track3",
-                    "trackName": "Track 3",
-                    "trackProgression": {
-                      "stepName": "Step 3",
-                      "stepDescription": "Description for step 3",
-                      "stepStatus": "Not Started"
+                    {
+                      "trackId": "track-003",
+                      "trackDescription": "Advanced Web Development",
+                      "trackName": "Full Stack Developer",
+                      "trackProgression": [
+                        {
+                          "stepName": "Frontend Frameworks",
+                          "stepDescription": "Learning React and Vue",
+                          "stepStatus": "Not Started",
+                          "projects": ["proj-301", "proj-302", "proj-303"]
+                        }
+                      ]
                     },
-                    "projects": ["project5", "project6"]
-                  },
-                  {
-                    "trackId": "track4",
-                    "trackDescription": "Description for track4",
-                    "trackName": "Track 4",
-                    "trackProgression": {
-                      "stepName": "Step 4",
-                      "stepDescription": "Description for step 4",
-                      "stepStatus": "Completed"
+                    {
+                      "trackId": "track-004",
+                      "trackDescription": "Data Science Fundamentals",
+                      "trackName": "Data Science 101",
+                      "trackProgression": [
+                        {
+                          "stepName": "Statistical Analysis",
+                          "stepDescription": "Basics of statistical analysis for data science",
+                          "stepStatus": "Completed",
+                          "projects": ["proj-401"]
+                        }
+                      ]
                     },
-                    "projects": ["project7", "project8"]
-                  },
-                  {
-                    "trackId": "track5",
-                    "trackDescription": "Description for track5",
-                    "trackName": "Track 5",
-                    "trackProgression": {
-                      "stepName": "Step 5",
-                      "stepDescription": "Description for step 5",
-                      "stepStatus": "In Review"
-                    },
-                    "projects": ["project9", "project10"]
-                  },
-                  {
-                    "trackId": "track6",
-                    "trackDescription": "Description for track6",
-                    "trackName": "Track 6",
-                    "trackProgression": {
-                      "stepName": "Step 6",
-                      "stepDescription": "Description for step 6",
-                      "stepStatus": "On Hold"
-                    },
-                    "projects": ["project11", "project12"]
-                  }
-                  # Add additional tracks as needed
-                ]
+                    {
+                      "trackId": "track-005",
+                      "trackDescription": "Cloud Computing with AWS",
+                      "trackName": "Cloud Mastery",
+                      "trackProgression": [
+                        {
+                          "stepName": "Cloud Basics",
+                          "stepDescription": "Understanding the fundamentals of cloud computing",
+                          "stepStatus": "In Progress",
+                          "projects": ["proj-501", "proj-502"]
+                        }
+                      ]
+                    }
+                  ]
+                }
         passthroughBehavior: "when_no_templates"
     post:
       summary: Create a new track
+      security:
+        - BearerAuth: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Track'
+              $ref: '#/components/schemas/TracksResponse'
       responses:
         '201':
           description: Track created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Track'
+                $ref: '#/components/schemas/TracksResponse'
         '400':
           description: Bad Request - The request was invalid or missing parameters.
         '500':
@@ -397,7 +399,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Track'
+                $ref: '#/components/schemas/TracksResponse'
         '404':
           description: Not Found - The track with the specified ID was not found.
         '500':
@@ -416,21 +418,23 @@ paths:
               application/json: |
                 #set($inputRoot = $input.path('$'))
                 {
-                  "trackId": "$input.params('trackId')",
-                  "trackDescription": "Description for $input.params('trackId')",
-                  "trackName": "Name for $input.params('trackId')",
-                  "trackProgression": {
-                    "stepName": "Step for $input.params('trackId')",
-                    "stepDescription": "Step description for $input.params('trackId')",
-                    "stepStatus": "Status for $input.params('trackId')"
-                  },
-                  "projects": [
-                    "project associated with $input.params('trackId')"
+                  "trackId": "track-001",
+                  "trackDescription": "Introduction to Programming",
+                  "trackName": "Beginner Programming",
+                  "trackProgression": [
+                    {
+                      "stepName": "Setup",
+                      "stepDescription": "Setting up the development environment",
+                      "stepStatus": "Completed",
+                      "projects": ["proj-101", "proj-102"]
+                    }
                   ]
                 }
         passthroughBehavior: "when_no_templates"
     put:
       summary: Update a track by ID
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: trackId
@@ -442,14 +446,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Track'
+              $ref: '#/components/schemas/TracksResponse'
       responses:
         '200':
           description: Track updated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Track'
+                $ref: '#/components/schemas/TracksResponse'
         '400':
           description: Bad Request - The request was invalid or missing parameters.
         '404':
@@ -474,6 +478,8 @@ paths:
         passthroughBehavior: "when_no_templates"
     delete:
       summary: Delete a track by ID
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: trackId
@@ -519,7 +525,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Project'
+                  $ref: '#/components/schemas/ProjectsResponse'
         '400':
           description: Bad Request - The request was invalid or missing parameters.
         '401':
@@ -543,61 +549,119 @@ paths:
             responseTemplates:
               application/json: |
                 #set($inputRoot = $input.path('$'))
-                [
-                  {
-                    "projectID": "project1",
-                    "repo_address": "https://github.com/user/project1",
-                    "projectDescription": "Description for project1",
-                    "resultsId": ["result1", "result2"]
-                  },
-                  {
-                    "projectID": "project2",
-                    "repo_address": "https://github.com/user/project2",
-                    "projectDescription": "Description for project2",
-                    "resultsId": ["result3", "result4"]
-                  },
-                  {
-                    "projectID": "project3",
-                    "repo_address": "https://github.com/user/project3",
-                    "projectDescription": "Description for project3",
-                    "resultsId": ["result5", "result6"]
-                  },
-                  {
-                    "projectID": "project4",
-                    "repo_address": "https://github.com/user/project4",
-                    "projectDescription": "Description for project4",
-                    "resultsId": ["result7", "result8"]
-                  },
-                  {
-                    "projectID": "project5",
-                    "repo_address": "https://github.com/user/project5",
-                    "projectDescription": "Description for project5",
-                    "resultsId": ["result9", "result10"]
-                  },
-                  {
-                    "projectID": "project6",
-                    "repo_address": "https://github.com/user/project6",
-                    "projectDescription": "Description for project6",
-                    "resultsId": ["result11", "result12"]
-                  }
-                  # Add additional projects as needed
-                ]
+                {
+                  "sub": "12345",
+                  "projects": [
+                    {
+                      "projectID": "proj-001",
+                      "repo_address": "https://github.com/exampleOrg/project-one",
+                      "projectDescription": "An open-source project focused on data visualization.",
+                      "results": {
+                        "result_title": "Code Quality Metrics",
+                        "metrics": [
+                          {
+                            "metricName": "Coverage",
+                            "metricValue": "90%"
+                          },
+                          {
+                            "metricName": "Bugs",
+                            "metricValue": "0"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "projectID": "proj-002",
+                      "repo_address": "https://github.com/exampleOrg/project-two",
+                      "projectDescription": "A REST API service for task management.",
+                      "results": {
+                        "result_title": "Performance Metrics",
+                        "metrics": [
+                          {
+                            "metricName": "Latency",
+                            "metricValue": "50ms"
+                          },
+                          {
+                            "metricName": "Throughput",
+                            "metricValue": "1000rps"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "projectID": "proj-003",
+                      "repo_address": "https://github.com/exampleOrg/project-three",
+                      "projectDescription": "A blockchain-based smart contract system.",
+                      "results": {
+                        "result_title": "Security Audit",
+                        "metrics": [
+                          {
+                            "metricName": "Vulnerabilities",
+                            "metricValue": "0"
+                          },
+                          {
+                            "metricName": "Security Score",
+                            "metricValue": "A+"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "projectID": "proj-004",
+                      "repo_address": "https://github.com/exampleOrg/project-four",
+                      "projectDescription": "Mobile app for real-time communication.",
+                      "results": {
+                        "result_title": "User Testing Feedback",
+                        "metrics": [
+                          {
+                            "metricName": "User Satisfaction",
+                            "metricValue": "95%"
+                          },
+                          {
+                            "metricName": "App Crashes",
+                            "metricValue": "1 per 1000 sessions"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "projectID": "proj-005",
+                      "repo_address": "https://github.com/exampleOrg/project-five",
+                      "projectDescription": "Machine learning model for image recognition.",
+                      "results": {
+                        "result_title": "Model Accuracy",
+                        "metrics": [
+                          {
+                            "metricName": "Accuracy",
+                            "metricValue": "92%"
+                          },
+                          {
+                            "metricName": "False Positives",
+                            "metricValue": "2%"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
         passthroughBehavior: "when_no_templates"
     post:
       summary: Create a new project
+      security:
+        - BearerAuth: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Project'
+              $ref: '#/components/schemas/ProjectsResponse'
       responses:
         '201':
           description: Project created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/ProjectsResponse'
         '400':
           description: Bad Request - The request was invalid or missing parameters.
         '401':
@@ -642,7 +706,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/ProjectsResponse'
         '400':
           description: Bad Request - The request was invalid or missing parameters.
         '404':
@@ -663,14 +727,31 @@ paths:
               application/json: |
                 #set($inputRoot = $input.path('$'))
                 {
-                  "projectID": "$input.params('projectId')",
-                  "repo_address": "https://github.com/user/$input.params('projectId')",
-                  "projectDescription": "Description for $input.params('projectId')",
-                  "resultsId": ["resultId1", "resultId2"]
+                  "projectID": "proj-1",
+                  "repo_address": "https://github.com/example/proj1",
+                  "projectDescription": "First project description",
+                  "results": [
+                    {
+                      "result_title": "Initial Test Coverage",
+                      "metrics": [
+                        { "metricName": "Coverage", "metricValue": 85 },
+                        { "metricName": "Branches", "metricValue": 70 }
+                      ]
+                    },
+                    {
+                      "result_title": "Code Quality Review",
+                      "metrics": [
+                        { "metricName": "Maintainability", "metricValue": 95 },
+                        { "metricName": "Technical Debt", "metricValue": 5 }
+                      ]
+                    }
+                  ]
                 }
         passthroughBehavior: "when_no_templates"
     put:
       summary: Update a project by ID
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: projectId
@@ -682,14 +763,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Project'
+              $ref: '#/components/schemas/ProjectsResponse'
       responses:
         '200':
           description: Project updated successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: '#/components/schemas/ProjectsResponse'
         '400':
           description: Bad Request - The request was invalid or missing parameters.
         '404':
@@ -714,6 +795,8 @@ paths:
         passthroughBehavior: "when_no_templates"
     delete:
       summary: Delete a project by ID
+      security:
+        - BearerAuth: []
       parameters:
         - in: path
           name: projectId
@@ -746,74 +829,122 @@ paths:
                 }
         passthroughBehavior: "when_no_templates"
 
+
 components:
   schemas:
     User:
       type: object
       required:
-        - uid
+        - sub
         - email
       properties:
-        uid:
+        sub:
           type: string
+          description: Unique identifier for the user assigned by Cognito
         github_ID:
           type: string
+          description: GitHub identifier associated with the user
         email:
           type: string
+          description: Email address of the user
         profile:
           type: object
           additionalProperties: true
-        evaluationTracks:
-          type: array
-          items:
-            type: string
+          description: A JSON object containing user profile details
 
-    Track:
-      type: object
-      required:
-        - trackId
-        - trackName
+    #Types and sub-types for project microservice
+    ProjectsResponse:
+      type: "object"
       properties:
-        trackId:
-          type: string
-        trackDescription:
-          type: string
-        trackName:
-          type: string
-        trackProgression:
-          type: object
-          required:
-            - stepName
-            - stepStatus
-          properties:
-            stepName:
-              type: string
-            stepDescription:
-              type: string
-            stepStatus:
-              type: string
+        sub:
+          type: "string"
         projects:
-          type: array
+          type: "array"
           items:
-            type: string
-
+            $ref: "#/components/schemas/Project"
     Project:
-      type: object
+      type: "object"
       required:
         - projectID
         - repo_address
         - projectDescription
+        - results
       properties:
         projectID:
-          type: string
+          type: "string"
         repo_address:
-          type: string
+          type: "string"
         projectDescription:
-          type: string
-        resultsId:
-          type: array
+          type: "string"
+        results:
+          $ref: "#/components/schemas/Results"
+    Results:
+      type: "object"
+      properties:
+        result_title:
+          type: "string"
+        metrics:
+          type: "array"
           items:
-            type: string
+            $ref: "#/components/schemas/Metric"
+    Metric:
+      type: "object"
+      required:
+        - metricName
+        - metricValue
+      properties:
+        metricName:
+          type: "string"
+        metricValue:
+          type: "string"
+
+  #types and subtypes for the track microservice
+    TracksResponse:
+      type: "object"
+      properties:
+        sub:
+          type: "string"
+        tracks:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Track"
+    Track:
+      type: "object"
+      required:
+        - trackId
+        - trackDescription
+        - trackName
+        - trackProgression
+      properties:
+        trackId:
+          type: "string"
+        trackDescription:
+          type: "string"
+        trackName:
+          type: "string"
+        trackProgression:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TrackProgression"
+    TrackProgression:
+      type: "object"
+      required:
+        - stepName
+        - stepDescription
+        - stepStatus
+        - projects
+      properties:
+        stepName:
+          type: "string"
+        stepDescription:
+          type: "string"
+        stepStatus:
+          type: "string" # This could be an enum if there are only specific statuses allowed
+        projects:
+          type: "array"
+          items:
+            type: "string" # Assuming projectIds are strings; could be integers or another type if needed
+
 
   securitySchemes:
     BearerAuth:
