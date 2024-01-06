@@ -47,7 +47,7 @@ const ClientChat=()=>{
   }, [fooEvents]);
   
   return (
-    <div className="flex flex-auto flex-col justify-center flex items-center h-screen py-4 bg-blue-950 border">
+    <div className="flex flex-auto flex-col justify-center flex items-center h-screen py-4 bg-blue-950">
       <div className="mb-8">
         <Header>Client Chat</Header>
       </div>
