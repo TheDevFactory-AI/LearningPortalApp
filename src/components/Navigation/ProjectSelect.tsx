@@ -15,31 +15,32 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { useNavigate } from "@tanstack/react-router"
  
 const frameworks = [
   {
-    value: "next.js",
-    label: "Next.js",
+    value: "nodejs",
+    label: "NodeJS",
   },
   {
-    value: "sveltekit",
-    label: "SvelteKit",
+    value: "terraform@lvl1",
+    label: "IaC w/ Terraform",
   },
   {
-    value: "nuxt.js",
-    label: "Nuxt.js",
+    value: "react_ts@lvl1",
+    label: "React Web App",
   },
   {
-    value: "remix",
-    label: "Remix",
+    value: "contenarization",
+    label: "Contenarization",
   },
   {
-    value: "astro",
-    label: "Astro",
+    value: "cicd_jenkins",
+    label: "CICD w/ Jenkins",
   },
   {
-    value: "angular",
-    label: "Angular",
+    value: "ts@lvl3",
+    label: "Typescript",
   },
 ]
 
@@ -47,12 +48,17 @@ const frameworks = [
 const ComboboxDemo=()=>{
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
+  const navigate=useNavigate({from:'/Auth'})
 
   const handleSelect=(currentValue:string)=>{
     setValue(currentValue === value ? "" : currentValue)
     setOpen(false)
     //imperatively call the router to navigate to the project
     console.log('navigating to project...',currentValue)
+    navigate({
+      to:'/course/$courseId',
+      params:{courseId:currentValue}
+    })
   }
 
 

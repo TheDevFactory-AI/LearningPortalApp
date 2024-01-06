@@ -1,6 +1,6 @@
 import { rootRoute } from "@/App"
 import LinksContainer from "@/components/Navigation/LinkContainer"
-import ComboboxDemo from "@/components/Navigation/ProjectSelect"
+import ProjectSearchBar from "@/components/Navigation/ProjectSelect"
 import SideBar from "@/components/Navigation/SideBar"
 import PressableButton from "@/components/ui/pressableButton"
 import { AuthenticateUserResp } from "@/pages/Authentication/AuthUtils/Login"
@@ -28,16 +28,15 @@ export const MainApp =  () => {
         <LinksContainer 
         links={[
           {to:"/overview",title:"Overview"},
-          {to:"/home", title:"Go home"},
           {to:"/chat", title:"Chat with client"}
         ]}/>
         <div className="pb-4">
-          <ComboboxDemo/>
+          <ProjectSearchBar/>
         </div>
         <div className="w-[200px] pl-4 border-none rounded hover:bg-blue-400">
         <Link 
           to={'course/$courseId'}
-          params={{courseId:1}}
+          params={{courseId:'ABC'}}
           className="[&.active]:font-bold text-white">
           {'Course Details'}
         </Link>

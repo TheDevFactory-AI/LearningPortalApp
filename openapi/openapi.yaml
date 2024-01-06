@@ -552,7 +552,8 @@ paths:
                 {
                   "sub": "12345",
                   "projects": [
-                    {
+                    { 
+                      "projectName": "Backend with NodeJS"
                       "projectID": "proj-001",
                       "repo_address": "https://github.com/exampleOrg/project-one",
                       "projectDescription": "An open-source project focused on data visualization.",
@@ -570,7 +571,8 @@ paths:
                         ]
                       }
                     },
-                    {
+                    { 
+                      "projectName": "React Web App"
                       "projectID": "proj-002",
                       "repo_address": "https://github.com/exampleOrg/project-two",
                       "projectDescription": "A REST API service for task management.",
@@ -589,6 +591,7 @@ paths:
                       }
                     },
                     {
+                      "projectName": "IaC with Terraform"
                       "projectID": "proj-003",
                       "repo_address": "https://github.com/exampleOrg/project-three",
                       "projectDescription": "A blockchain-based smart contract system.",
@@ -607,6 +610,7 @@ paths:
                       }
                     },
                     {
+                      "projectName": "CICD with Jenkins"
                       "projectID": "proj-004",
                       "repo_address": "https://github.com/exampleOrg/project-four",
                       "projectDescription": "Mobile app for real-time communication.",
@@ -625,6 +629,7 @@ paths:
                       }
                     },
                     {
+                      "projectName": "Contenarization"
                       "projectID": "proj-005",
                       "repo_address": "https://github.com/exampleOrg/project-five",
                       "projectDescription": "Machine learning model for image recognition.",
@@ -865,11 +870,14 @@ components:
     Project:
       type: "object"
       required:
+        - projectName
         - projectID
         - repo_address
         - projectDescription
         - results
       properties:
+        projectName:
+          type: "string"
         projectID:
           type: "string"
         repo_address:

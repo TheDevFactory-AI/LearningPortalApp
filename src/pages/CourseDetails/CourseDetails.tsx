@@ -2,7 +2,6 @@
 import { MainAppRoute } from "@/rootRoutes/MainApp";
 import { manageAccessToken } from "@/utils/Auth/Session";
 import { Route } from '@tanstack/react-router';
-import { z } from 'zod';
 import { AuthenticateUserResp } from "../Authentication/AuthUtils/Login";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 /*
@@ -35,9 +34,12 @@ const CourseDetailsRoute = new Route({
     path: "course/$courseId",
     component: CourseDetails,//this is how the component is rendered based on the path
     //this is why the suspense is working
+    /*
     parseParams: (params) => ({
       courseId: z.number().int().parse(Number(params.courseId)),
     }),
+    */
+    
     stringifyParams: ({ courseId }) => ({ courseId: `${courseId}` }),
     beforeLoad:async ({context:{auth,queryClient}})=>{
       const session=await manageAccessToken({AuthPayload:auth})
