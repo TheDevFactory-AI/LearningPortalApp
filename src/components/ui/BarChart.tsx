@@ -1,14 +1,15 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 
 export type MetricData={
+  //refactor this
     name:string,
     total:number
 }
 
 export const BarChartDisplayer = ({data}:{data:MetricData[]}) => {
   return (
-    <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={data}>
+    <ResponsiveContainer width="100%" height={250}>
+      <BarChart data={data} margin={{ top: 20, right: 5, bottom: -10, left: -25 }}>
         <XAxis
           dataKey="name"
           stroke="#888888"

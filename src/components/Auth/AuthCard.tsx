@@ -24,7 +24,7 @@ export function AuthCard({
 
 
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[350px] bg-white">
       <CardHeader>
         <CardTitle>{cardTitle}</CardTitle> 
         <CardDescription>{cardDescription}</CardDescription>
