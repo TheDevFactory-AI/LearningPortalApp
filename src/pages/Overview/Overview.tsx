@@ -9,8 +9,6 @@ import { data01, data02, barChartData, barChartData2 } from "@/mockData/ChartDat
 import {TitleSmall, Title, Header} from "@/components/ui/Title"
 import Timeline from "./Timeline"
 import { projectsList } from "@/mockData/projects"
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 
 const Overview=()=>{
   return (
@@ -22,7 +20,7 @@ const Overview=()=>{
       <div className="grid grid-cols-3">
         
         <div className="flex flex-col basis-1/3">
-          <Card className="basis-1/2 m-4 p-4 bg-white border-none">
+          <Card className="basis-1/2 m-4 p-4 bg-white border">
             <CardTitle className="flex text-white">
               <Title>Overrall Rating</Title>
             </CardTitle>
@@ -30,7 +28,7 @@ const Overview=()=>{
               <PieChartDisplayer data={[data01]}/>
             </CardContent>
           </Card>
-          <Card className="basis-1/2 m-4 p-4 bg-white border-none">
+          <Card className="basis-1/2 m-4 p-4 bg-white border">
             <CardTitle className="flex text-white">
               <Title>Front-End</Title>
             </CardTitle>
@@ -41,7 +39,7 @@ const Overview=()=>{
         </div>
 
         <div className="flex flex-col basis-1/3">
-          <Card className="basis-1/2 m-4 p-4 bg-white border-none">
+          <Card className="basis-1/2 m-4 p-4 bg-white border">
             <CardTitle className="basis-1/2 text-white">
               <Title>Version Control and Workflow</Title>
             </CardTitle>
@@ -49,7 +47,7 @@ const Overview=()=>{
               <PieChartDisplayer data={[data02]}/>
             </CardContent>
           </Card>
-          <Card className="basis-1/2 m-4 p-4 bg-white border-none">
+          <Card className="basis-1/2 m-4 p-4 bg-white border">
             <CardTitle className="flex text-white">
               <Title>Back-End</Title>
             </CardTitle>
