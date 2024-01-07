@@ -18,7 +18,9 @@ import type {
   UseQueryResult
 } from '@tanstack/react-query'
 import type {
+  Project,
   ProjectsResponse,
+  Track,
   TracksResponse,
   User
 } from '../../model'
@@ -426,7 +428,7 @@ export const getTracksTrackId = (
 ) => {
       
       
-      return customClient<TracksResponse>(
+      return customClient<Track>(
       {url: `/tracks/${trackId}`, method: 'GET', signal
     },
       );
@@ -590,7 +592,7 @@ export const getProjects = (
 ) => {
       
       
-      return customClient<ProjectsResponse[]>(
+      return customClient<ProjectsResponse>(
       {url: `/projects`, method: 'GET', signal
     },
       );
@@ -703,7 +705,7 @@ export const getProjectsProjectId = (
 ) => {
       
       
-      return customClient<ProjectsResponse>(
+      return customClient<Project>(
       {url: `/projects/${projectId}`, method: 'GET', signal
     },
       );

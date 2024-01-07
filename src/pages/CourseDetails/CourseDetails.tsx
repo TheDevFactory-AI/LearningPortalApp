@@ -3,6 +3,7 @@ import { MainAppRoute } from "@/rootRoutes/MainApp";
 import { manageAccessToken } from "@/utils/Auth/Session";
 import { Route } from '@tanstack/react-router';
 import { AuthenticateUserResp } from "../Authentication/AuthUtils/Login";
+import Header from "@/components/ui/Header";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 /*
 const courseQueryOptions = ({courseId}:{courseId:number}) =>queryOptions({
@@ -20,10 +21,16 @@ const CourseDetails = ({useParams}:{useParams:any}) => {
   const {courseId} = useParams();
   //create custom hook to get the data
   //const {data}=useSuspenseQuery(courseQueryOptions({courseId}))
+  //const {data,isFetched}=useGetProjectsProjectId(courseId)
+
 
  
   return (
-    <div className="flex flex-col justify-center flex items-center h-screen bg-blue-950">HEY {courseId}</div>
+    <div className="flex flex-col p-4 bg-blue-950 min-h-screen">
+      <div className="flex pl-4 ">
+        <Header>{courseId}</Header>
+      </div>
+    </div>
   )
 }
 

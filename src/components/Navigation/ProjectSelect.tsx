@@ -16,39 +16,15 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { useNavigate } from "@tanstack/react-router"
- 
-const frameworks = [
-  {
-    value: "nodejs",
-    label: "NodeJS",
-  },
-  {
-    value: "terraform@lvl1",
-    label: "IaC w/ Terraform",
-  },
-  {
-    value: "react_ts@lvl1",
-    label: "React Web App",
-  },
-  {
-    value: "contenarization",
-    label: "Contenarization",
-  },
-  {
-    value: "cicd_jenkins",
-    label: "CICD w/ Jenkins",
-  },
-  {
-    value: "ts@lvl3",
-    label: "Typescript",
-  },
-]
+import { useGetProjects } from '../../../openapi/api/endpoints/default/default';
+
 
 //refactor this component to take in an array of projects
 const ComboboxDemo=()=>{
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
   const navigate=useNavigate({from:'/Auth'})
+  const {data}=useGetProjects()
 
   const handleSelect=(currentValue:string)=>{
     setValue(currentValue === value ? "" : currentValue)
@@ -73,7 +49,7 @@ const ComboboxDemo=()=>{
           className="w-[200px] text-base justify-between text-white"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
+            ? data?.projects.find((project) => project.projectID === value)?.projectName
             : "Browse projects..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -83,19 +59,19 @@ const ComboboxDemo=()=>{
           <CommandInput placeholder="Search Projects..." />
           <CommandEmpty>No Project found.</CommandEmpty>
           <CommandGroup>
-            {frameworks.map((framework) => (
+            {data?.projects.map((project) => (
               <CommandItem
-                key={framework.value}
-                value={framework.value}
+                key={project.projectID}
+                value={project.projectID}
                 onSelect={handleSelect}
               >
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === framework.value ? "opacity-100" : "opacity-0"
+                    value === project.projectID ? "opacity-100" : "opacity-0"
                   )}
                 />
-                {framework.label}
+                {project.projectName}
               </CommandItem>
             ))}
           </CommandGroup>
