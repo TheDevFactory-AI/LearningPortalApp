@@ -730,7 +730,7 @@ paths:
               application/json: |
                 #set($inputRoot = $input.path('$'))
                 {
-                  "projectName": "Backend with NodeJS"
+                  "projectName": "Backend with NodeJS",
                   "projectID": "proj-1",
                   "repo_address": "https://github.com/example/proj1",
                   "projectDescription": "First project description",

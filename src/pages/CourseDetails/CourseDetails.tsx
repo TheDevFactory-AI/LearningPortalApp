@@ -4,31 +4,22 @@ import { manageAccessToken } from "@/utils/Auth/Session";
 import { Route } from '@tanstack/react-router';
 import { AuthenticateUserResp } from "../Authentication/AuthUtils/Login";
 import Header from "@/components/ui/Header";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-/*
-const courseQueryOptions = ({courseId}:{courseId:number}) =>queryOptions({
-  //bind page to 
-  queryKey: ['course',courseId],
-  queryFn: () =>  fetch(`/api/courses/${courseId}`).then((res) =>
-  res.json()),
-})
-*/
+import { useGetProjectsProjectId } from '../../../openapi/api/endpoints/default/default';
 
-
-
-//desperate attempt to get useParams to work
 const CourseDetails = ({useParams}:{useParams:any}) => {
   const {courseId} = useParams();
   //create custom hook to get the data
   //const {data}=useSuspenseQuery(courseQueryOptions({courseId}))
-  //const {data,isFetched}=useGetProjectsProjectId(courseId)
+  const {data,isFetched}=useGetProjectsProjectId(courseId)
 
-
+  if(isFetched){
+    console.log(data)
+  }
  
   return (
     <div className="flex flex-col p-4 bg-blue-950 min-h-screen">
       <div className="flex pl-4 ">
-        <Header>{courseId}</Header>
+        <Header>{data?.projectName}</Header>
       </div>
     </div>
   )
