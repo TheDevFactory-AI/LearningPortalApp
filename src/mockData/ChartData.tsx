@@ -10,16 +10,9 @@ export const data01: PieChartDisplayerProp = {metricDataName: "Data1", metricDat
 
 export const data02: PieChartDisplayerProp = {metricDataName: "Data2", metricData: [
         { name: 'A1', total: 100 },
-        { name: 'A2', total: 300 },
+        { name: 'A2', total: 200 },
         { name: 'B1', total: 100 },
         { name: 'B2', total: 80 },
-        { name: 'B3', total: 40 },
-        { name: 'B4', total: 30 },
-        { name: 'B5', total: 50 },
-        { name: 'C1', total: 100 },
-        { name: 'C2', total: 200 },
-        { name: 'D1', total: 150 },
-        { name: 'D2', total: 50 },
       ]
     }
   
