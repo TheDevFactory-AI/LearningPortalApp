@@ -17,8 +17,8 @@ const PieChartDisplayer = ({data}:{data:[PieChartDisplayerProp] | [PieChartDispl
           nameKey="name" 
           cx="50%" 
           cy="50%" 
-          outerRadius={65} 
-          fill="#c6f702" />
+          outerRadius={85} 
+          fill="#f59e0b" />
       {
         dataLength===2 && <Pie data={data[1].metricData} dataKey="total" nameKey="name" cx="50%" cy="50%" innerRadius={75} outerRadius={95} fill="#02f7ef"  />
       }

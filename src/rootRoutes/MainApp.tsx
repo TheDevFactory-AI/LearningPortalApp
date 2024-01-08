@@ -34,8 +34,8 @@ export const MainApp =  () => {
         </div>
       </div>
       <div className="basis-1/6">
-        <LinksContainer
-        links={[{to:"/about",title:"About", disabled:true}]}/>
+        {/* <LinksContainer
+        links={[{to:"/about",title:"About"}]}/> */}
         <PressableButton onPress={logOut}>Log out</PressableButton>
       </div>
     </SideBar>
@@ -59,6 +59,10 @@ export const MainAppRoute=new Route({
           replace:true
         })
       }
+      /* redirect({
+        to:'/overview',
+        replace: true
+      }) */
       return {
         auth:resp //making auth payload available accross all child pages
       }

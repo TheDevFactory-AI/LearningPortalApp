@@ -1,4 +1,4 @@
-import { Card} from "@/components/ui/card"
+//import { Card} from "@/components/ui/card"
 import MessageBubble, { ChatBubbleProp } from "./MessageBubble"
 
 
@@ -10,12 +10,12 @@ import MessageBubble, { ChatBubbleProp } from "./MessageBubble"
 const ChatWindow=({conversation}:{conversation:ChatBubbleProp[]})=>{
     const showChat=conversation && conversation.length
     return (
-        <Card className="flex-auto h-[500px] w-[1000px] border-none bg-black overflow-auto p-4">
+        <div className="flex-auto h-[590px] w-[1250px] border-none bg-gray-800 overflow-auto p-4">
         {showChat && conversation.map(({from,text})=>{
             return <MessageBubble  from={from} text={text}/>
         }
         )}
-        </Card>
+        </div>
     )
 }
 
