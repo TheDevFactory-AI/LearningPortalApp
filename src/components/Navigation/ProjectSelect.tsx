@@ -26,13 +26,21 @@ const ComboboxDemo=()=>{
   const {data}=useGetProjects()
 
   const handleSelect=(currentValue:string)=>{
-    setValue(currentValue === value ? "" : currentValue)
+    //currentValue is the project Name but all in lowercase.
+    const lowerCaseProjectNames=data?.projects.map((project)=>{
+      return {
+        ...project,
+        projectName:project.projectName.toLowerCase()
+      }
+    })
+    const projectId=lowerCaseProjectNames?.find((project)=>project.projectName===currentValue)?.projectID??''
+    setValue(projectId === value ? "" : projectId)
     setOpen(false)
     //imperatively call the router to navigate to the project
     console.log('navigating to project...',currentValue)
     navigate({
       to:'/course/$courseId',
-      params:{courseId:currentValue}
+      params:{courseId:projectId}
     })
   }
 
@@ -61,7 +69,8 @@ const ComboboxDemo=()=>{
                 {data?.projects.map((proj) => (
                   <CommandItem
                     key={proj.projectID}
-                    value={proj.projectID}
+                    value={proj.projectName}
+                    //problem: value does
                     onSelect={handleSelect}
                   >
                     {proj.projectName}
