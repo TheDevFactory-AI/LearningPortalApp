@@ -17,7 +17,7 @@ import { ChatBubbleProp } from '@/components/Chat/MessageBubble'
 
 
 const ClientChat=()=>{
-  const [chatMessage, setChatMessage] = useState<ChatBubbleProp[]|undefined>([]);
+  const [chatMessage, setChatMessage] = useState<ChatBubbleProp[]>([]);
   const {register, handleSubmit, setValue}=useForm()
 
 
