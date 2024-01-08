@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import ChatWindow from '@/components/Chat/ChatWindow'
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import { Header, Title } from "@/components/ui/Title"
+//import { Header, Title } from "@/components/ui/Title"
 //import base_icon_white_background from "../../assets/base_icon_white_background.png"
 import { ChatBubbleProp } from '@/components/Chat/MessageBubble'
 

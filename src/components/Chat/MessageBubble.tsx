@@ -1,5 +1,5 @@
 // MessageBubble component
-import { useState } from "react";
+//import { useState } from "react";
 
 export type ChatBubbleProp={
     from:'Me' | 'Bot',
