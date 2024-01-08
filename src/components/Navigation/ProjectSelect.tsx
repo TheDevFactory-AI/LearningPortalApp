@@ -1,6 +1,4 @@
 import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
- 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -17,68 +15,76 @@ import {
 } from "@/components/ui/popover"
 import { useNavigate } from "@tanstack/react-router"
 import { useGetProjects } from '../../../openapi/api/endpoints/default/default';
+import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
 
 
 //refactor this component to take in an array of projects
 const ComboboxDemo=()=>{
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
-  const navigate=useNavigate({from:'/Auth'})
+  const navigate=useNavigate({from:'/auth'})
   const {data}=useGetProjects()
 
   const handleSelect=(currentValue:string)=>{
-    setValue(currentValue === value ? "" : currentValue)
+    //currentValue is the project Name but all in lowercase.
+    const lowerCaseProjectNames=data?.projects.map((project)=>{
+      return {
+        ...project,
+        projectName:project.projectName.toLowerCase()
+      }
+    })
+    const projectId=lowerCaseProjectNames?.find((project)=>project.projectName===currentValue)?.projectID??''
+    setValue(projectId === value ? "" : projectId)
     setOpen(false)
     //imperatively call the router to navigate to the project
-    console.log('navigating to project...',currentValue)
     navigate({
       to:'/course/$courseId',
-      params:{courseId:currentValue}
+      params:{courseId:projectId}
     })
   }
 
 
  
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-[200px] text-base justify-between text-white"
-        >
-          {value
-            ? data?.projects.find((project) => project.projectID === value)?.projectName
-            : "Browse projects..."}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0 bg-white">
-        <Command>
-          <CommandInput placeholder="Search Projects..." />
-          <CommandEmpty>No Project found.</CommandEmpty>
-          <CommandGroup>
-            {data?.projects.map((project) => (
-              <CommandItem
-                key={project.projectID}
-                value={project.projectID}
-                onSelect={handleSelect}
-              >
-                <Check
-                  className={cn(
-                    "mr-2 h-4 w-4",
-                    value === project.projectID ? "opacity-100" : "opacity-0"
-                  )}
-                />
-                {project.projectName}
-              </CommandItem>
-            ))}
-          </CommandGroup>
-        </Command>
-      </PopoverContent>
-    </Popover>
-  )
-}
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={open}
+              className="w-[200px] justify-between text-black bg-white"
+            >
+              {value
+                ? data?.projects.find((proj) => proj.projectID === value)?.projectName
+                : "Select framework..."}
+              <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[200px] p-0 bg-white">
+            <Command>
+              <CommandInput placeholder="Search framework..." className="h-9" />
+              <CommandEmpty>No framework found.</CommandEmpty>
+              <CommandGroup>
+                {data?.projects.map((proj) => (
+                  <CommandItem
+                    key={proj.projectID}
+                    value={proj.projectName}
+                    onSelect={handleSelect}
+                  >
+                    {proj.projectName}
+                    <CheckIcon
+                      className={cn(
+                        "ml-auto h-4 w-4",
+                        value === proj.projectID ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </Command>
+          </PopoverContent>
+        </Popover>
+      )
+    }
 
 export default ComboboxDemo

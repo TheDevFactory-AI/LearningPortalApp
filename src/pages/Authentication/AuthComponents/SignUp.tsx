@@ -19,7 +19,7 @@ import { useNavigate } from '@tanstack/react-router';
 
 
 export const SignUp = ({setConfirmationStage}:{setConfirmationStage:()=>void}) => {
-  const navigate=useNavigate({from:'/Auth'})
+  const navigate=useNavigate({from:'/auth'})
   const [signupCodeStatus,setSignupCodeStatus]=useState<'idle' | 'in progress'>('idle')
   const queryClient=useQueryClient()
   const {mutate:Login,isSuccess:loginSuccess}=useSignIn({queryClient})
