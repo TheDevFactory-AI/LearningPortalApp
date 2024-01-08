@@ -4,7 +4,7 @@ import ProjectSearchBar from "@/components/Navigation/ProjectSelect"
 import SideBar from "@/components/Navigation/SideBar"
 import PressableButton from "@/components/ui/pressableButton"
 import { AuthenticateUserResp } from "@/pages/Authentication/AuthUtils/Login"
-import { Outlet,Link, Route, redirect, useNavigate } from "@tanstack/react-router"
+import { Outlet, Route, redirect, useNavigate } from "@tanstack/react-router"
 import { useQueryClient } from "@tanstack/react-query"
 import Header from "@/components/ui/Header"
 
@@ -14,10 +14,9 @@ export const MainApp =  () => {
   const logOut=async ()=>{
     queryClient.setQueryData(['Auth'],null)
     setTimeout(()=>{
-      navigate({to:'/Auth'})
+      navigate({to:'/auth'})
     },1000)
   }
-  //for lougout, clear queryData
   return (
     <>
     <SideBar>
@@ -32,14 +31,6 @@ export const MainApp =  () => {
         ]}/>
         <div className="pb-4">
           <ProjectSearchBar/>
-        </div>
-        <div className="w-[200px] pl-4 border-none rounded hover:bg-blue-400">
-        <Link 
-          to={'course/$courseId'}
-          params={{courseId:'ABC'}}
-          className="[&.active]:font-bold text-white">
-          {'Course Details'}
-        </Link>
         </div>
       </div>
       <div className="basis-1/6">
@@ -64,7 +55,7 @@ export const MainAppRoute=new Route({
       const resp=queryClient.getQueryData(['Auth']) as AuthenticateUserResp | undefined
       if(!resp){
         throw redirect({
-          to:'/Auth',
+          to:'/auth',
           replace:true
         })
       }

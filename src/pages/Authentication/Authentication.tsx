@@ -35,7 +35,7 @@ const Authentication = () => {
 
 const AuthRoute = new Route({
     getParentRoute: () => rootRoute,
-    path: "/Auth",
+    path: "/auth",
     component: Authentication,
 })
 export default AuthRoute

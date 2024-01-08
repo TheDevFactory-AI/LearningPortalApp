@@ -8,7 +8,7 @@ import {
 import { getUser } from './GetUser';
   
 export interface AuthenticateUserResp {
-    type: string;
+    type: 'SUCCESS' | 'NEW_PASSWORD_REQUIRED' | 'TOTP_REQUIRED';
     cognitoUser: CognitoUser;
   
     session?: CognitoUserSession;

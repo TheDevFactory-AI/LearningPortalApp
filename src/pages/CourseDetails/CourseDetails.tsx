@@ -10,12 +10,8 @@ const CourseDetails = ({useParams}:{useParams:any}) => {
   const {courseId} = useParams();
   //create custom hook to get the data
   //const {data}=useSuspenseQuery(courseQueryOptions({courseId}))
-  const {data,isFetched}=useGetProjectsProjectId(courseId)
-
-  if(isFetched){
-    console.log(data)
-  }
- 
+  const {data}=useGetProjectsProjectId(courseId)
+  
   return (
     <div className="flex flex-col p-4 bg-blue-950 min-h-screen">
       <div className="flex pl-4 ">
