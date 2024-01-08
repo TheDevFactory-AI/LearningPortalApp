@@ -37,7 +37,7 @@ const ComboboxDemo=()=>{
     setValue(projectId === value ? "" : projectId)
     setOpen(false)
     //imperatively call the router to navigate to the project
-    console.log('navigating to project...',currentValue)
+    console.log('navigating to project...',projectId)
     navigate({
       to:'/course/$courseId',
       params:{courseId:projectId}
@@ -70,7 +70,6 @@ const ComboboxDemo=()=>{
                   <CommandItem
                     key={proj.projectID}
                     value={proj.projectName}
-                    //problem: value does
                     onSelect={handleSelect}
                   >
                     {proj.projectName}
