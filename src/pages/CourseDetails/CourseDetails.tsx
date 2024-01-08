@@ -2,29 +2,26 @@
 import { MainAppRoute } from "@/rootRoutes/MainApp";
 import { manageAccessToken } from "@/utils/Auth/Session";
 import { Route } from '@tanstack/react-router';
-import { z } from 'zod';
 import { AuthenticateUserResp } from "../Authentication/AuthUtils/Login";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-/*
-const courseQueryOptions = ({courseId}:{courseId:number}) =>queryOptions({
-  //bind page to 
-  queryKey: ['course',courseId],
-  queryFn: () =>  fetch(`/api/courses/${courseId}`).then((res) =>
-  res.json()),
-})
-*/
+import Header from "@/components/ui/Header";
+import { useGetProjectsProjectId } from '../../../openapi/api/endpoints/default/default';
 
-
-
-//desperate attempt to get useParams to work
 const CourseDetails = ({useParams}:{useParams:any}) => {
   const {courseId} = useParams();
   //create custom hook to get the data
   //const {data}=useSuspenseQuery(courseQueryOptions({courseId}))
+  const {data,isFetched}=useGetProjectsProjectId(courseId)
 
+  if(isFetched){
+    console.log(data)
+  }
  
   return (
-    <div className="flex flex-col justify-center flex items-center h-screen bg-blue-950">HEY {courseId}</div>
+    <div className="flex flex-col p-4 bg-blue-950 min-h-screen">
+      <div className="flex pl-4 ">
+        <Header>{data?.projectName}</Header>
+      </div>
+    </div>
   )
 }
 
@@ -35,9 +32,12 @@ const CourseDetailsRoute = new Route({
     path: "course/$courseId",
     component: CourseDetails,//this is how the component is rendered based on the path
     //this is why the suspense is working
+    /*
     parseParams: (params) => ({
       courseId: z.number().int().parse(Number(params.courseId)),
     }),
+    */
+    
     stringifyParams: ({ courseId }) => ({ courseId: `${courseId}` }),
     beforeLoad:async ({context:{auth,queryClient}})=>{
       const session=await manageAccessToken({AuthPayload:auth})

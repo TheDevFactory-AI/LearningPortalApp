@@ -10,6 +10,7 @@ import type { Results } from './results';
 export interface Project {
   projectDescription: string;
   projectID: string;
+  projectName: string;
   repo_address: string;
   results: Results;
 }

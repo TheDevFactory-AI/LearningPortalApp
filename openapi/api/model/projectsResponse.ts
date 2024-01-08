@@ -8,6 +8,7 @@
 import type { Project } from './project';
 
 export interface ProjectsResponse {
-  projects?: Project[];
-  sub?: string;
+  projects: Project[];
+  /** Unique identifier for the user assigned by Cognito */
+  sub: string;
 }

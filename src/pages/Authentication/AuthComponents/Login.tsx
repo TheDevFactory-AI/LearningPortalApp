@@ -19,30 +19,25 @@ export const Login = () => {
       userName: "",
       password: "",
     }});
-  const {mutate:SignIn}=useSignIn({queryClient})
+  const {mutate:SignIn,isSuccess,isPending}=useSignIn({queryClient})
   const _triggerSubmit = () => {
     submitRef?.current?.click();
   };
   const submitRef = useRef(null) as any
-  const dragSignIn=async (data:any)=>{
+
+  const onSubmit = async (data:{userName:string,password:string}) => {
     SignIn({
       userName:data.userName,
       password:data.password
     })
-    return new Promise<void>((resolve)=>{
-      setTimeout(()=>resolve(),2000) //dragging signIn to ensure data is put into queryClient
-    })
-  }
-
-  const onSubmit = async (data:any) => {
-    await dragSignIn(data)
-    navigate({to:'/'})
-    console.log('should be navigating')
-
-    
   };
+
+  if(isSuccess && queryClient.getQueryData(['Auth'])){
+    navigate({to:'/'})
+  }
   return (
     <AuthCard 
+    loading={isPending}
     cardTitle="Log in"
     cardDescription="Enter your username and password to log into your account"
     onSubmit={_triggerSubmit}>

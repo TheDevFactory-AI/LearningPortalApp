@@ -399,7 +399,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TracksResponse'
+                $ref: "#/components/schemas/Track"
         '404':
           description: Not Found - The track with the specified ID was not found.
         '500':
@@ -523,9 +523,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ProjectsResponse'
+                $ref: '#/components/schemas/ProjectsResponse'
         '400':
           description: Bad Request - The request was invalid or missing parameters.
         '401':
@@ -552,7 +550,8 @@ paths:
                 {
                   "sub": "12345",
                   "projects": [
-                    {
+                    { 
+                      "projectName": "Backend with NodeJS",
                       "projectID": "proj-001",
                       "repo_address": "https://github.com/exampleOrg/project-one",
                       "projectDescription": "An open-source project focused on data visualization.",
@@ -570,7 +569,8 @@ paths:
                         ]
                       }
                     },
-                    {
+                    { 
+                      "projectName": "React Web App",
                       "projectID": "proj-002",
                       "repo_address": "https://github.com/exampleOrg/project-two",
                       "projectDescription": "A REST API service for task management.",
@@ -589,6 +589,7 @@ paths:
                       }
                     },
                     {
+                      "projectName": "IaC with Terraform",
                       "projectID": "proj-003",
                       "repo_address": "https://github.com/exampleOrg/project-three",
                       "projectDescription": "A blockchain-based smart contract system.",
@@ -607,6 +608,7 @@ paths:
                       }
                     },
                     {
+                      "projectName": "CICD with Jenkins",
                       "projectID": "proj-004",
                       "repo_address": "https://github.com/exampleOrg/project-four",
                       "projectDescription": "Mobile app for real-time communication.",
@@ -625,6 +627,7 @@ paths:
                       }
                     },
                     {
+                      "projectName": "Contenarization",
                       "projectID": "proj-005",
                       "repo_address": "https://github.com/exampleOrg/project-five",
                       "projectDescription": "Machine learning model for image recognition.",
@@ -706,7 +709,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectsResponse'
+                $ref: "#/components/schemas/Project"
         '400':
           description: Bad Request - The request was invalid or missing parameters.
         '404':
@@ -727,6 +730,7 @@ paths:
               application/json: |
                 #set($inputRoot = $input.path('$'))
                 {
+                  "projectName": "Backend with NodeJS",
                   "projectID": "proj-1",
                   "repo_address": "https://github.com/example/proj1",
                   "projectDescription": "First project description",
@@ -855,9 +859,13 @@ components:
     #Types and sub-types for project microservice
     ProjectsResponse:
       type: "object"
+      required:
+        - sub
+        - projects
       properties:
         sub:
           type: "string"
+          description: Unique identifier for the user assigned by Cognito
         projects:
           type: "array"
           items:
@@ -865,11 +873,14 @@ components:
     Project:
       type: "object"
       required:
+        - projectName
         - projectID
         - repo_address
         - projectDescription
         - results
       properties:
+        projectName:
+          type: "string"
         projectID:
           type: "string"
         repo_address:
