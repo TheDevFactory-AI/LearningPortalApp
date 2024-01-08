@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 export const Login = () => {
-  const navigate=useNavigate({from:'/Auth'})
+  const navigate=useNavigate({from:'/auth'})
   const queryClient=useQueryClient()
   const { register, handleSubmit, formState: {errors} } = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),

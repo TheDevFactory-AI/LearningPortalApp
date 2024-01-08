@@ -22,7 +22,7 @@ import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
 const ComboboxDemo=()=>{
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
-  const navigate=useNavigate({from:'/Auth'})
+  const navigate=useNavigate({from:'/auth'})
   const {data}=useGetProjects()
 
   const handleSelect=(currentValue:string)=>{
@@ -37,7 +37,6 @@ const ComboboxDemo=()=>{
     setValue(projectId === value ? "" : projectId)
     setOpen(false)
     //imperatively call the router to navigate to the project
-    console.log('navigating to project...',projectId)
     navigate({
       to:'/course/$courseId',
       params:{courseId:projectId}
@@ -53,7 +52,7 @@ const ComboboxDemo=()=>{
               variant="outline"
               role="combobox"
               aria-expanded={open}
-              className="w-[200px] justify-between text-white"
+              className="w-[200px] justify-between text-black bg-white"
             >
               {value
                 ? data?.projects.find((proj) => proj.projectID === value)?.projectName
